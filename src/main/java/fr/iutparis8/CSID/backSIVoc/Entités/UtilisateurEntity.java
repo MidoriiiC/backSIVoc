@@ -24,7 +24,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import fr.iutparis8.CSID.backSIVoc.Objets.RoleEnum;
+import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
 @SuppressWarnings("serial")
 @Entity
@@ -86,17 +86,18 @@ public class UtilisateurEntity implements UserDetails{
         this.enabled = true;
         this.roles = Collections.singletonList(RoleEnum.UTILISATEUR);
     }
-//	public UtilisateurEntity(String username, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
-//        this.username = username;
-//        this.password = BCryptManagerUtil.passwordencoder().encode(password);
+	public UtilisateurEntity(String username, String password, String firstname, String lastname, Collection<RoleEnum> roles) {
+        //String username, String password, String firstname, String lastname, Collection<RoleEnum> roles
+		this.username = username;
+        this.password = password;
 //        this.firstname = firstname;
 //        this.lastname = lastname;
-//        this.accountNonExpired = true;
-//        this.accountNonLocked = true;
-//        this.credentialsNonExpired = true;
-//        this.enabled = true;
-//        this.roles = roles;
-//    }
+        this.accountNonExpired = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
+        this.enabled = true;
+        this.roles = roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
