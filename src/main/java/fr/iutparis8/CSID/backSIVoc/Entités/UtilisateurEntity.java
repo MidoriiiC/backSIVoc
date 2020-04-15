@@ -24,7 +24,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import fr.iutparis8.CSID.backSIVoc.Objets.RoleEnum;
+import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
 @SuppressWarnings("serial")
 @Entity
