@@ -28,8 +28,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) 
       throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-          .password("password").roles("USER");
+      //  auth.inMemoryAuthentication().withUser("user")
+        //  .password("password").roles("USER");
     }
 	
 	@Override
@@ -54,13 +54,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.jdbcAuthentication().dataSource(getDataSource())
+        /**auth.jdbcAuthentication().dataSource(getDataSource())
                 .withDefaultSchema()
                 .withUser(
                         User.withUsername("admin")
                                 .password(passwordEncoder().encode("admin"))
                                 .authorities(AuthorityUtils.createAuthorityList("ADMIN")).build()
-                );
+                );**/
     }
     
     @Bean
