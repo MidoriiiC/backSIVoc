@@ -11,7 +11,9 @@ public class EvenementDTO {
 	private String lieu;
 	private String organisateur;
 	
-	
+	public EvenementDTO() {
+		
+	}
 	
 	public EvenementDTO(int id, String nom, String contenuArticle, String image, String lienVideo, String date,
 			String heure, String lieu, String organisateur) {

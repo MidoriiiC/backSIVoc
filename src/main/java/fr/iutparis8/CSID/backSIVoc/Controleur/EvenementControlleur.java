@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,16 @@ public class EvenementControlleur {
 	@Autowired
 	public EvenementControlleur(EvenementService es) {
 		this.service = es;
+	}
+	
+	@CrossOrigin(origins = "*")
+	@PutMapping("/{id}")
+	public ResponseEntity<?> modifierEvenement(@PathVariable int id, @RequestBody EvenementDTO evenement){
+        if(id != evenement.getId()) {
+    		return ResponseEntity.badRequest().build();
+        }
+        Evenement evenementModifie = this.service.modifier(EvenementMapper.DtoVersObjet(evenement));
+        return ResponseEntity.created(null).body(EvenementMapper.objetVersDto(evenementModifie));
 	}
 	
 	@CrossOrigin(origins = "*")

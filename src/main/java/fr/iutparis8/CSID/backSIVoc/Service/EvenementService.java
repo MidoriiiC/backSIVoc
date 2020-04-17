@@ -3,6 +3,7 @@ package fr.iutparis8.CSID.backSIVoc.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.iutparis8.CSID.backSIVoc.Entités.EvenementEntite;
 import fr.iutparis8.CSID.backSIVoc.Mapper.EvenementMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Evenement;
 import fr.iutparis8.CSID.backSIVoc.Repository.EvenementRepository;
@@ -23,5 +24,10 @@ public class EvenementService {
 	
 	public Evenement creerEvenement(Evenement e) {
 		return EvenementMapper.entiteVersObjet(this.er.save(EvenementMapper.objetVersEntite(e)));
+	}
+
+	public Evenement modifier(Evenement e) {
+		EvenementEntite evenementModifie = this.er.save(EvenementMapper.objetVersEntite((e)));
+        return EvenementMapper.entiteVersObjet(evenementModifie);
 	}
 }
