@@ -1,26 +1,14 @@
 package fr.iutparis8.CSID.backSIVoc.Objets;
 
-public class Utilisateur {
+import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
-	private String nom;
-	private String mdp;
+public class Utilisateur{
+
 	private int id;
+	private String nom;
+	private String motDePasse;
+	private RoleEnum role;
 
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getMdp() {
-		return mdp;
-	}
-
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
 
 	public int getId() {
 		return id;
@@ -31,12 +19,28 @@ public class Utilisateur {
 	}
 
 	public Utilisateur() {
-
 	}
 
-	@Override
-	public String toString() {
-		String s = "id :" + this.getId() + " nom :" + this.getNom() + " mdp :" + this.getMdp();
-		return s;
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getMdp() {
+		return motDePasse;
+	}
+
+	public void setMdp(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
+	
+	public void setRole(RoleEnum r) {
+		this.role = r;
+	}
+	public RoleEnum getRole() {
+		return this.role;
 	}
 }

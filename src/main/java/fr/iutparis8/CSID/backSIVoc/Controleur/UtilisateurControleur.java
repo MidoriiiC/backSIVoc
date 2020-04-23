@@ -19,6 +19,15 @@ import fr.iutparis8.CSID.backSIVoc.Objets.BlocPassword;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
 import fr.iutparis8.CSID.backSIVoc.Service.UtilisateurService;
 
+
+/**
+ * 
+ * @author midoriiiC
+ * 
+ * Le but de la classe UtilisateurControleur est de permettre aux modérateurs et aux admins
+ * de créer un compte, de modifier un compte, et de voir la liste des utilisateurs.
+ *
+ */
 @RestController
 @RequestMapping("/utilisateurs")
 public class UtilisateurControleur {

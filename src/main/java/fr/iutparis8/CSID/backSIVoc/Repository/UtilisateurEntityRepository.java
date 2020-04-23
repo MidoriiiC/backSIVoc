@@ -7,7 +7,7 @@ import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 
 @Repository
 public interface UtilisateurEntityRepository extends JpaRepository<UtilisateurEntity,Integer>{
-
-	UtilisateurEntity findByUsername(String username);
+	
+    //UtilisateurEntity findUserWithName(String username);
 
 }

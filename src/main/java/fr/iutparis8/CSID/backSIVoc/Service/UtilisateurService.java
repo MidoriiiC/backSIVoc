@@ -3,6 +3,7 @@ package fr.iutparis8.CSID.backSIVoc.Service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,11 +38,11 @@ public class UtilisateurService implements UserDetailsService {
 		return u;
 	}
 	
-	public Utilisateur getUtilisateurParNom(String nom) {
-		UtilisateurEntity uent = this.uer.findByUsername(nom);
-		Utilisateur e = UtilisateurMapper.utilisateurEntityToUtilisateur(uent);
-		return e;
-	}
+//	public Utilisateur getUtilisateurParNom(String nom) {
+//		UtilisateurEntity uent = this.uer.findByUsername(nom);
+//		Utilisateur e = UtilisateurMapper.utilisateurEntityToUtilisateur(uent);
+//		return e;
+//	}
 	
 	public List<Utilisateur> getAllUtilisateurs() {
 		List<UtilisateurEntity> listUent = this.ur.findAll();
@@ -70,16 +71,11 @@ public class UtilisateurService implements UserDetailsService {
 
 		return 0;
 	}
-	
-	@Override
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UtilisateurEntity user = uer.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Aucun utilisateur enregistré avec le nom : " + username);
-        }
-        else {
-            return user;  //je ne sais pas si ça marche
-        }
+        Objects.requireNonNull(username);
+        UtilisateurEntity user = uer.findUserWithName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return user;
     }
-
 }

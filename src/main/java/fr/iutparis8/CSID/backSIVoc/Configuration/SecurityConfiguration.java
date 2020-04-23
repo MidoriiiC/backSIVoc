@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,11 +17,17 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fr.iutparis8.CSID.backSIVoc.Service.UtilisateurService;
+
+@Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	private static DataSource dataSource;
-
+	
+//    @Autowired
+//    UtilisateurService utilisateurService;
+	
     public SecurityConfiguration(DataSource dataSource){
         SecurityConfiguration.dataSource = dataSource;
     }
@@ -51,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
+		//auth.userDetailsService(utilisateurService);
         auth.jdbcAuthentication().dataSource(getDataSource())
                 .withDefaultSchema()
                 .withUser(
@@ -76,5 +83,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	public static DataSource getDataSource() {
 		return dataSource;
 	}
-
 }
