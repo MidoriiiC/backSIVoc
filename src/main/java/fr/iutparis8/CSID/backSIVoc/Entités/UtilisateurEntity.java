@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
@@ -48,7 +49,6 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 
 	//nullable = false
 	@Column(name = "authorities")
-	//@Value(value = "UTILISATEUR")
 	@Enumerated(EnumType.STRING)
 	private RoleEnum role;
 
@@ -90,8 +90,10 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<GrantedAuthority> ls = new ArrayList<>();
+		ls.add(new SimpleGrantedAuthority("ROLE_CAN_DO_WHOAMI"));
+		ls.add(new SimpleGrantedAuthority("ROLE_USER"));
+		return ls;
 	}
 
 	@Override
@@ -128,4 +130,21 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 		return null;
 	}
 
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	
 }
