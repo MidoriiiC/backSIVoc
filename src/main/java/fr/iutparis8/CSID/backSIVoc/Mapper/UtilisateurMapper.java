@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
 import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
@@ -20,6 +22,12 @@ public class UtilisateurMapper {
     	uent.setUsername(u.getNom());
     	uent.setPassword(u.getMdp());
     	uent.setRole(u.getRole());
+    	
+    	uent.setAccountNonLocked(true);
+    	uent.setCredentialsNonExpired(true);
+    	uent.setEnabled(true);
+    	uent.setAccountNonExpired(true);
+    	
 		System.out.println(uent.toString());
 		return uent;
 	}

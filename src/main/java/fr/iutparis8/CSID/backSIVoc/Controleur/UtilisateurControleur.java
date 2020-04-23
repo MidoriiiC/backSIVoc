@@ -1,9 +1,15 @@
 package fr.iutparis8.CSID.backSIVoc.Controleur;
 
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +45,56 @@ public class UtilisateurControleur {
 		this.service = us;
 	}
 
+	@RolesAllowed("ROLE_CAN_DO_WHOAMI")
+	@GetMapping("/whoami")
+	public String whoAmI() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUser = null;
+		String currentCred = null;
+		Collection<? extends GrantedAuthority> roles = null;
+		if (authentication != null) {
+			currentUser = authentication.getName();
+			currentCred = (String) authentication.getCredentials();
+			roles = authentication.getAuthorities();
+		}
+		System.out.println("http GET /utilisateurs/whoami currentUser:" + currentUser + " cred:" + currentCred
+				+ " roles:" + roles);
+		return currentUser;
+	}
+	
+	@GetMapping("/whoami3")
+	public String whoAmI3() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUser = null;
+		String currentCred = null;
+		Collection<? extends GrantedAuthority> roles = null;
+		if (authentication != null) {
+			currentUser = authentication.getName();
+			currentCred = (String) authentication.getCredentials();
+			roles = authentication.getAuthorities();
+		}
+		System.out.println("http GET /utilisateurs/whoami currentUser:" + currentUser + " cred:" + currentCred
+				+ " roles:" + roles);
+		return currentUser;
+	}
+	
+	@RolesAllowed("ROLE_CAN_DO_WHOAMI__")
+	@GetMapping("/whoami2")
+	public String whoAmI2() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUser = null;
+		String currentCred = null;
+		Collection<? extends GrantedAuthority> roles = null;
+		if (authentication != null) {
+			currentUser = authentication.getName();
+			currentCred = (String) authentication.getCredentials();
+			roles = authentication.getAuthorities();
+		}
+		System.out.println("http GET /utilisateurs/whoami currentUser:" + currentUser + " cred:" + currentCred
+				+ " roles:" + roles);
+		return currentUser;
+	}
+	
 	@PutMapping("/{utilisateur}")
 	public ResponseEntity<?> updateMotDePasse(@PathVariable String utilisateur, @RequestBody BlocPassword bp) {
 
