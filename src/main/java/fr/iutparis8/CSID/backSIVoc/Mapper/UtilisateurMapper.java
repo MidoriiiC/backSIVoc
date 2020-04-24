@@ -1,21 +1,34 @@
 package fr.iutparis8.CSID.backSIVoc.Mapper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.persistence.Column;
 
 import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
 import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
+import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
 public class UtilisateurMapper {
 	
-	
 	public static UtilisateurEntity utilisateurToUtilisateurEntity(Utilisateur u) {  //2
-		UtilisateurEntity uent = new UtilisateurEntity();
-		uent.setId(u.getId());
-		uent.setNom(u.getNom());
-		uent.setPassword(u.getMdp());
+		Collection<RoleEnum> auth = new ArrayList<RoleEnum>();
+		auth.add(RoleEnum.UTILISATEUR);
+    	UtilisateurEntity uent = new UtilisateurEntity();
+    	uent.setId(u.getId());
+    	uent.setUsername(u.getNom());
+    	uent.setPassword(u.getMdp());
+    	uent.setRole(u.getRole());
+    	
+    	uent.setAccountNonLocked(true);
+    	uent.setCredentialsNonExpired(true);
+    	uent.setEnabled(true);
+    	uent.setAccountNonExpired(true);
+    	
+		System.out.println(uent.toString());
 		return uent;
 	}
 	

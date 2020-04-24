@@ -13,23 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.iutparis8.CSID.backSIVoc.Configuration.SecurityConfiguration;
-import fr.iutparis8.CSID.backSIVoc.Objets.Authentification;
+import fr.iutparis8.CSID.backSIVoc.Objets.CreationCompte;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
 import fr.iutparis8.CSID.backSIVoc.Service.ConnexionService;
+import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
 @RestController
 @RequestMapping("/connexion")
 public class ConnexionControleur {
-	
+
 	private ConnexionService service;
-	
+
 	@Autowired
 	public ConnexionControleur(ConnexionService cs) {
-		this.service=cs;
+		this.service = cs;
 	}
-	
+
 	@GetMapping
-    public String getConnexion() {
+	public String getConnexion() {
 		try {
 			Connection c = SecurityConfiguration.getDataSource().getConnection();
 			System.out.println(c.isValid(0));
@@ -37,18 +38,20 @@ public class ConnexionControleur {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-        return "a tester";
-    }
-	
+		return "a tester";
+	}
+
 	@PostMapping
-	public ResponseEntity<?> creationCompte(@RequestBody Authentification auth) throws URISyntaxException {  //ne marche pas bien
+	public ResponseEntity<?> creationCompte(@RequestBody CreationCompte auth) throws URISyntaxException { // ne marche
+																											// pas bien
 		Utilisateur u = new Utilisateur();
 		u.setId(auth.getId());
 		u.setNom(auth.getNom());
 		u.setMdp(SecurityConfiguration.passwordEncoder().encode(auth.getMdp()));
-		System.out.println(u.toString());
+		u.setRole(RoleEnum.UTILISATEUR);
+		System.out.println("dans ConnectionC, u= " + u.toString());
 		Utilisateur reponse = this.service.creerUtilisateur(u);
-		if(reponse.getNom()==u.getNom()) {
+		if (reponse.getNom() == u.getNom()) {
 			return ResponseEntity.created(null).build();
 		}
 		return ResponseEntity.badRequest().build();

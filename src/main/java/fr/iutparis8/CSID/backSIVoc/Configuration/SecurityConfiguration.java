@@ -4,7 +4,9 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,11 +18,18 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fr.iutparis8.CSID.backSIVoc.Service.UtilisateurService;
+
+@Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(jsr250Enabled = true, proxyTargetClass = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	private static DataSource dataSource;
-
+	
+    @Autowired
+    UtilisateurService utilisateurService;
+	
     public SecurityConfiguration(DataSource dataSource){
         SecurityConfiguration.dataSource = dataSource;
     }
@@ -28,8 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) 
       throws Exception {
-      //  auth.inMemoryAuthentication().withUser("user")
-        //  .password("password").roles("USER");
+        auth.inMemoryAuthentication().withUser("user")
+          .password("password").roles("USER");
     }
 	
 	@Override
@@ -40,27 +49,40 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/connexion").permitAll()
         .antMatchers("/utilisateurs").permitAll()
-        .antMatchers("/evenements").permitAll()
-        .antMatchers("/evenements/*").permitAll()
-        .anyRequest().authenticated().and().csrf().disable();
+        .antMatchers("/utilisateurs/whoami").permitAll()
+        .antMatchers("/utilisateurs/whoami2").authenticated()
+        
+        .antMatchers("/utilisateurs/whoami3")
+        	.hasAuthority("ROLE_CAN_DO_WHOAMI")
+        	
+        .anyRequest().authenticated()
+        
+    	
+        .and().csrf().disable();
 		
+		http.httpBasic();
 		
 		http.headers().frameOptions().sameOrigin();
 		
-		http.addFilter(new JsonAuthenticationFilter(authenticationManager(), new
-				ObjectMapper()));
+//		http.addFilter(new JsonAuthenticationFilter(authenticationManager(), new
+//				ObjectMapper()));
 	}
 	
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        /**auth.jdbcAuthentication().dataSource(getDataSource())
-                .withDefaultSchema()
-                .withUser(
-                        User.withUsername("admin")
-                                .password(passwordEncoder().encode("admin"))
-                                .authorities(AuthorityUtils.createAuthorityList("ADMIN")).build()
-                );**/
+		auth.userDetailsService(utilisateurService);
+//        auth.jdbcAuthentication()
+//        	.dataSource(getDataSource())
+            // .usersByUsernameQuery(query)
+        	// .passwordEncoder(passwordEncoder)
+        	// .authoritiesByUsernameQuery(query)
+        	
+//        	.withDefaultSchema()
+//                .withUser(
+//                        User.withUsername("admin")
+//                                .password(passwordEncoder().encode("admin"))
+//                                .authorities(AuthorityUtils.createAuthorityList("ADMIN")).build()
+//                );
     }
     
     @Bean
@@ -78,5 +100,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	public static DataSource getDataSource() {
 		return dataSource;
 	}
-
 }
