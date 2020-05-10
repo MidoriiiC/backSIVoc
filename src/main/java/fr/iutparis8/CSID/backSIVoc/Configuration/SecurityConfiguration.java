@@ -50,10 +50,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         .antMatchers("/connexion").permitAll()
         .antMatchers("/utilisateurs").permitAll()
         .antMatchers("/utilisateurs/whoami").permitAll()
+        .antMatchers("/evenements/*").permitAll()
+        .antMatchers("/articles/*").permitAll()
         .antMatchers("/utilisateurs/whoami2").authenticated()
         
         .antMatchers("/utilisateurs/whoami3")
-        	.hasAuthority("ROLE_CAN_DO_WHOAMI")
+        .hasAuthority("ROLE_CAN_DO_WHOAMI")
         	
         .anyRequest().authenticated()
         
