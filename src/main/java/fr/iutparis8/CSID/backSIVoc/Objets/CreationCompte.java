@@ -2,7 +2,9 @@ package fr.iutparis8.CSID.backSIVoc.Objets;
 
 public class CreationCompte {
 	private String nom;
+	private String prenom;
 	private int id;
+	private String email;
 	private String mdp;
 	
 	public CreationCompte() {
@@ -30,6 +32,22 @@ public class CreationCompte {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

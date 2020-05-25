@@ -3,11 +3,11 @@ package fr.iutparis8.CSID.backSIVoc.Service;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
 import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Mapper.UtilisateurMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
@@ -21,18 +21,18 @@ public class ConnexionService implements UserDetailsService {
 	        this.uer = userRepository;
 	    }
 	    @Override
-	    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//	        Objects.requireNonNull(username);
-//	        UtilisateurEntity user = uer.findUserWithName(username)
-//	                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//	        return user;
-	    	return null;
+	    public UtilisateurEntity loadUserByUsername(String username) throws UsernameNotFoundException {
+	        Objects.requireNonNull(username);
+	        UtilisateurEntity user = uer.findOneByUsername(username);
+	        return user;
 	    }
 
-	public Utilisateur creerUtilisateur(Utilisateur u) {
+	public Utilisateur creerUtilisateur(UtilisateurDTO dto) {
 
+		Utilisateur u = UtilisateurMapper.utilisateurDTOtoUtilisateur(dto);
+		System.out.println(u.getMdp() +"\n");
 		UtilisateurEntity eent = UtilisateurMapper.utilisateurToUtilisateurEntity(u);
-		System.out.println("dans connexionS, Ue= " + eent.toString());
+		System.out.println("dans connexionS, Ue= " + eent.getUsername() + eent.getAuthorities() + "\n et mdp " +eent.getPassword());
 		UtilisateurEntity retour = uer.save(eent);  //entity must not be null.
 		System.out.println(" pas de pb dans le save(objet)");
 		u = UtilisateurMapper.utilisateurEntityToUtilisateur(retour);

@@ -48,6 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         .antMatchers("/").permitAll()
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/connexion").permitAll()
+        .antMatchers("/connexion/creationlambda").permitAll()
+        .antMatchers("/connexion/creation").permitAll()
         .antMatchers("/utilisateurs").permitAll()
         .antMatchers("/utilisateurs/whoami").permitAll()
         .antMatchers("/utilisateurs/whoami2").authenticated()
@@ -71,18 +73,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(utilisateurService);
-//        auth.jdbcAuthentication()
-//        	.dataSource(getDataSource())
-            // .usersByUsernameQuery(query)
-        	// .passwordEncoder(passwordEncoder)
-        	// .authoritiesByUsernameQuery(query)
-        	
-//        	.withDefaultSchema()
-//                .withUser(
-//                        User.withUsername("admin")
-//                                .password(passwordEncoder().encode("admin"))
-//                                .authorities(AuthorityUtils.createAuthorityList("ADMIN")).build()
-//                );
     }
     
     @Bean

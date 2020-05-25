@@ -45,6 +45,8 @@ public class UtilisateurControleur {
 		this.service = us;
 	}
 
+	
+	
 	@RolesAllowed("ROLE_CAN_DO_WHOAMI")
 	@GetMapping("/whoami")
 	public String whoAmI() {

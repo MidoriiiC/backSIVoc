@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,7 +40,8 @@ public class UtilisateurService implements UserDetailsService {
 	}
 	
 //	public Utilisateur getUtilisateurParNom(String nom) {
-//		UtilisateurEntity uent = this.uer.findByUsername(nom);
+//		Optional<UtilisateurEntity> uent = this.uer.findOneByUsername(nom);
+//		if (uent!=null)
 //		Utilisateur e = UtilisateurMapper.utilisateurEntityToUtilisateur(uent);
 //		return e;
 //	}
@@ -65,17 +67,18 @@ public class UtilisateurService implements UserDetailsService {
 				return 1;// goodConnection
 			}
 		} catch (SQLException sqlexc) {
-			System.out.println(sqlexc +" "+ sqlexc.getCause() +" "+ sqlexc.getMessage() +" "+ sqlexc.getSQLState());
+			System.out.println(sqlexc + " " + sqlexc.getCause() + " " + sqlexc.getMessage() + " " + sqlexc.getSQLState());
 			return 2;
 		}
 
 		return 0;
 	}
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Objects.requireNonNull(username);
-        UtilisateurEntity user = uer.findOneByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return user;
-    }
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Objects.requireNonNull(username);
+		UtilisateurEntity user = uer.findOneByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		return user;
+	}
 }
