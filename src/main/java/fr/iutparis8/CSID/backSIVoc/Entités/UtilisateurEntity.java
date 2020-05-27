@@ -72,6 +72,9 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 	@Column(name = "account_non_expired")
 	private boolean accountNonExpired;
 
+	@Column(name = "token")
+	private String token;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -168,5 +171,12 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 
 	public UtilisateurEntity orElseThrow(Object object) {
 		return null;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public String getToken() {
+		return this.token;
 	}
 }

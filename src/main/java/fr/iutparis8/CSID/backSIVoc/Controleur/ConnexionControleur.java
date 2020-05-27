@@ -1,10 +1,9 @@
 package fr.iutparis8.CSID.backSIVoc.Controleur;
 
 import java.net.URISyntaxException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +18,7 @@ import fr.iutparis8.CSID.backSIVoc.Configuration.SecurityConfiguration;
 import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
 import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Mapper.UtilisateurMapper;
+import fr.iutparis8.CSID.backSIVoc.Objets.Authentification;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
 import fr.iutparis8.CSID.backSIVoc.Service.ConnexionService;
 import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
@@ -34,19 +34,32 @@ public class ConnexionControleur {
 		this.service = cs;
 	}
 
-	@GetMapping
-	public String getConnexionBase() {
-		try {
-			Connection c = SecurityConfiguration.getDataSource().getConnection();
-			System.out.println(c.isValid(0));
-			return "is valid";
-		} catch (SQLException e) {
-			e.printStackTrace();
+	@CrossOrigin(origins = "*")
+	@PostMapping
+	public ResponseEntity<?> getConnexion(@RequestBody Authentification auth) {
+		//auth.setMdp(SecurityConfiguration.passwordEncoder().encode(auth.getMdp()));
+		if (auth != null) {
+			System.out.println("pour l'auth: " + auth.getNom() + " et mdp:" + auth.getMdp());
+			UtilisateurEntity ue = this.service.loadUserByUsername(auth.getNom());
+			if (ue != null) {
+				Utilisateur u = UtilisateurMapper.utilisateurEntityToUtilisateur(ue);
+				UtilisateurDTO dto = UtilisateurMapper.utilisateurToUtilisateurDTO(u);
+				System.out.println("pour l'auth: " + auth.getNom() + " et mdp:" + auth.getMdp());
+				System.out.println("pour le DTO: " + dto.getNom() + " et mdp: " + dto.getMdp());
+
+				if (auth.getNom().equals(dto.getNom()) && auth.getMdp().equals(dto.getMdp()))
+					return ResponseEntity.ok().body(dto);
+				//System.out.println("mauvais mdp\n");
+			}
+			else {
+				//System.out.println("mauvais login\n");
+			}
 		}
-		return "a tester";
+
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");
 	}
 
-	// fonction debug 
+	// fonction de debug
 	@PostMapping("/creationlambda")
 	public ResponseEntity<?> creationComptesLambda() {
 		boolean allCreationsIsOK;
@@ -89,11 +102,8 @@ public class ConnexionControleur {
 
 	@CrossOrigin(origins = "*")
 	@PostMapping("/creation")
-	public ResponseEntity<?> creationCompte(@RequestBody UtilisateurDTO auth) throws URISyntaxException { // ne marche
-			// pas bien
-		System.out.println(auth.getNom() + auth.getMdp());
-		auth.setMdp(SecurityConfiguration.passwordEncoder().encode(auth.getMdp()));
-		System.out.println(auth.getMdp());
+	public ResponseEntity<?> creationCompte(@RequestBody UtilisateurDTO auth) throws URISyntaxException {
+		//auth.setMdp(SecurityConfiguration.passwordEncoder().encode(auth.getMdp()));
 		auth.setRole(RoleEnum.ROLE_UTILISATEUR);
 		Utilisateur reponse = this.service.creerUtilisateur(auth);
 		if (reponse.getNom() == auth.getNom()) {
@@ -101,22 +111,18 @@ public class ConnexionControleur {
 		}
 		return ResponseEntity.badRequest().build();
 	}
-	
+
 	@GetMapping("/infos")
-	public UtilisateurDTO info(){
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			String currentUser = null;
-			if (authentication != null) {
-				currentUser = authentication.getName();
-			}
-			UtilisateurEntity ue = this.service.loadUserByUsername(currentUser);
-			Utilisateur  u= UtilisateurMapper.utilisateurEntityToUtilisateur(ue);
-			UtilisateurDTO dto = UtilisateurMapper.utilisateurToUtilisateurDTO(u);
-			return dto;
-	}
-	@PostMapping
-	public Authentication connexion() {
-		return null;
+	public UtilisateurDTO info() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentUser = null;
+		if (authentication != null) {
+			currentUser = authentication.getName();
+		}
+		UtilisateurEntity ue = this.service.loadUserByUsername(currentUser);
+		Utilisateur u = UtilisateurMapper.utilisateurEntityToUtilisateur(ue);
+		UtilisateurDTO dto = UtilisateurMapper.utilisateurToUtilisateurDTO(u);
+		return dto;
 	}
 
 }

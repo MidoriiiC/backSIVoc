@@ -1,7 +1,5 @@
 package fr.iutparis8.CSID.backSIVoc.Repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +11,7 @@ public interface UtilisateurEntityRepository extends JpaRepository<UtilisateurEn
     UtilisateurEntity findOneByUsername(String username);
 
     UtilisateurEntity getByUsername(String username); // => throws EntityNotFoundException
+    
+
 
 }

@@ -3,7 +3,6 @@ package fr.iutparis8.CSID.backSIVoc.Objets;
 public class Authentification {
 	
 	private String nom;
-	private int id;
 	private String mdp;
 	
 	public Authentification() {
@@ -24,14 +23,6 @@ public class Authentification {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 }
