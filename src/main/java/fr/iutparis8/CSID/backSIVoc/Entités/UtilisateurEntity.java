@@ -23,14 +23,14 @@ import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "utilisateur")
-public class UtilisateurEntity implements Serializable , UserDetails{
-	
-	public UtilisateurEntity(){
+public class UtilisateurEntity implements Serializable, UserDetails {
+
+	public UtilisateurEntity() {
 	}
-	
+
 	private static Collection<? extends GrantedAuthority> getDefaultAuthority() {
 		Collection<RoleEnum> auth = new ArrayList<RoleEnum>();
-		auth.add(RoleEnum.UTILISATEUR);
+		auth.add(RoleEnum.ROLE_UTILISATEUR);
 		return auth;
 	}
 
@@ -42,12 +42,20 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 	@Column(name = "username", nullable = false)
 	@NotNull
 	private String username;
+	
+	@Column(name = "firstname", nullable = false)
+	@NotNull
+	private String firstname;
 
 	@Column(name = "password", nullable = false)
 	@NotNull
 	private String password;
 
-	//nullable = false
+	@Column(name = "email", nullable = false)
+	@NotNull
+	private String email;
+	
+	// nullable = false
 	@Column(name = "authorities")
 	@Enumerated(EnumType.STRING)
 	private RoleEnum role;
@@ -64,10 +72,13 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 	@Column(name = "account_non_expired")
 	private boolean accountNonExpired;
 
+	@Column(name = "token")
+	private String token;
+
 	public Integer getId() {
 		return this.id;
 	}
-	
+
 	public RoleEnum getRole() {
 		return role;
 	}
@@ -83,9 +94,25 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 	public void setPassword(String mdp) {
 		this.password = mdp;
 	}
-	
+
 	public void setRole(RoleEnum r) {
-		this.role=r;
+		this.role = r;
+	}
+	
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
@@ -126,10 +153,6 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 		return this.enabled;
 	}
 
-	public UtilisateurEntity orElseThrow(Object object) {
-		return null;
-	}
-
 	public void setAccountNonLocked(boolean accountNonLocked) {
 		this.accountNonLocked = accountNonLocked;
 	}
@@ -146,5 +169,14 @@ public class UtilisateurEntity implements Serializable , UserDetails{
 		this.accountNonExpired = accountNonExpired;
 	}
 
-	
+	public UtilisateurEntity orElseThrow(Object object) {
+		return null;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public String getToken() {
+		return this.token;
+	}
 }

@@ -1,5 +1,9 @@
 package fr.iutparis8.CSID.backSIVoc.Controleur;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.iutparis8.CSID.backSIVoc.DTO.EvenementDTO;
+import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
 import fr.iutparis8.CSID.backSIVoc.Mapper.EvenementMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Evenement;
+import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
 import fr.iutparis8.CSID.backSIVoc.Service.EvenementService;
 
+@Transactional
 @RestController
 @RequestMapping("/evenements")
 public class EvenementControlleur {
@@ -51,6 +58,14 @@ public class EvenementControlleur {
 	@GetMapping("/{id}")
 	public EvenementDTO evenementParId(@PathVariable int id) {
 		return EvenementMapper.objetVersDto(this.service.getEvenementParId(id));
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping
+	public List<EvenementDTO> getAllEvenement() {
+		List<Evenement> listE = this.service.getAllEvenements();
+		List<EvenementDTO> listDTO = EvenementMapper.listeObjetVersListeDTO(listE);
+		return listDTO;
 	}
 
 }

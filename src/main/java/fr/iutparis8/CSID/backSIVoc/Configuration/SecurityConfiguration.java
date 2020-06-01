@@ -48,43 +48,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         .antMatchers("/").permitAll()
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/connexion").permitAll()
+        .antMatchers("/connexion/creationlambda").permitAll()
+        .antMatchers("/connexion/creation").permitAll()
         .antMatchers("/utilisateurs").permitAll()
         .antMatchers("/utilisateurs/whoami").permitAll()
         .antMatchers("/evenements/*").permitAll()
         .antMatchers("/articles/*").permitAll()
         .antMatchers("/utilisateurs/whoami2").authenticated()
-        
         .antMatchers("/utilisateurs/whoami3")
         .hasAuthority("ROLE_CAN_DO_WHOAMI")
-        	
         .anyRequest().authenticated()
-        
-    	
         .and().csrf().disable();
-		
-		http.httpBasic();
-		
+		http.httpBasic();		
 		http.headers().frameOptions().sameOrigin();
-		
-//		http.addFilter(new JsonAuthenticationFilter(authenticationManager(), new
-//				ObjectMapper()));
 	}
 	
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(utilisateurService);
-//        auth.jdbcAuthentication()
-//        	.dataSource(getDataSource())
-            // .usersByUsernameQuery(query)
-        	// .passwordEncoder(passwordEncoder)
-        	// .authoritiesByUsernameQuery(query)
-        	
-//        	.withDefaultSchema()
-//                .withUser(
-//                        User.withUsername("admin")
-//                                .password(passwordEncoder().encode("admin"))
-//                                .authorities(AuthorityUtils.createAuthorityList("ADMIN")).build()
-//                );
     }
     
     @Bean

@@ -1,5 +1,7 @@
 package fr.iutparis8.CSID.backSIVoc.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,11 @@ public class ArticleService {
 	public Article modify(Article a) {
 		ArticleEntity articleModified = this.ar.save(ArticleMapper.objectToEntity((a)));
         return ArticleMapper.entityToObject(articleModified);
+	}
+
+	public List<Article> getAllArticles() {
+		List<ArticleEntity> articles = this.ar.findAll();
+		return ArticleMapper.listEntityToListObject(articles);
 	}
 	
 }

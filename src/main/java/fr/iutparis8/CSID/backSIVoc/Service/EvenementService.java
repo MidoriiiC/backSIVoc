@@ -1,5 +1,7 @@
 package fr.iutparis8.CSID.backSIVoc.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,10 @@ public class EvenementService {
 	public Evenement modifier(Evenement e) {
 		EvenementEntite evenementModifie = this.er.save(EvenementMapper.objetVersEntite((e)));
         return EvenementMapper.entiteVersObjet(evenementModifie);
+	}
+
+	public List<Evenement> getAllEvenements() {
+		List<EvenementEntite> evenements = this.er.findAll();
+		return EvenementMapper.listeEntiteVersListeObjet(evenements);
 	}
 }

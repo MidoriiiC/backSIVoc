@@ -1,5 +1,7 @@
 package fr.iutparis8.CSID.backSIVoc.Controleur;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,6 +53,13 @@ public class ArticleController {
 	@GetMapping("/{id}")
 	public ArticleDTO articleById(@PathVariable int id) {
 		return ArticleMapper.objectToDTO(this.service.getArticleById(id));
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping
+	public List<ArticleDTO> allArticles(){
+		List<Article> articles = this.service.getAllArticles();
+		return ArticleMapper.listObjectToListDTO(articles);
 	}
 
 }
