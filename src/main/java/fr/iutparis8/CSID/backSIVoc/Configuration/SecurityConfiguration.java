@@ -10,82 +10,71 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.iutparis8.CSID.backSIVoc.Service.UtilisateurService;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true, proxyTargetClass = true)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
-	
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
 	private static DataSource dataSource;
-	
-    @Autowired
-    UtilisateurService utilisateurService;
-	
-    public SecurityConfiguration(DataSource dataSource){
-        SecurityConfiguration.dataSource = dataSource;
-    }
-	
+
 	@Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) 
-      throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-          .password("password").roles("USER");
-    }
-	
+	UtilisateurService utilisateurService;
+
+	public SecurityConfiguration(DataSource dataSource) {
+		SecurityConfiguration.dataSource = dataSource;
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+	}
+
 	@Override
-	protected void configure(HttpSecurity http) throws Exception{
-		http.formLogin().disable()
-        .authorizeRequests()
-        .antMatchers("/").permitAll()
-        .antMatchers("/h2-console/**").permitAll()
-        .antMatchers("/connexion").permitAll()
-        .antMatchers("/connexion/creationlambda").permitAll()
-        .antMatchers("/connexion/creation").permitAll()
-        .antMatchers("/utilisateurs").permitAll()
-        .antMatchers("/utilisateurs/whoami").permitAll()
-        .antMatchers("/utilisateurs/whoami2").authenticated()
-        
-        .antMatchers("/utilisateurs/whoami3")
-        	.hasAuthority("ROLE_CAN_DO_WHOAMI")
-        	
-        .anyRequest().authenticated()
-        
-    	
-        .and().csrf().disable();
-		
+	protected void configure(HttpSecurity http) throws Exception {
+		http.formLogin().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers("/h2-console/**")
+				.permitAll().antMatchers("/connexion").permitAll().antMatchers("/connexion/creationlambda").permitAll()
+				.antMatchers("/connexion/creation").permitAll().antMatchers("/utilisateurs").permitAll()
+				.antMatchers("/utilisateurs/whoami").permitAll().antMatchers("/utilisateurs/whoami2").authenticated()
+				.antMatchers("/evenements/*").permitAll().antMatchers("/articles/*").permitAll()
+				.antMatchers("/utilisateurs/whoami3").hasAuthority("ROLE_CAN_DO_WHOAMI")
+
+				.anyRequest().authenticated()
+
+				.and().csrf().disable();
+
 		http.httpBasic();
-		
+
 		http.headers().frameOptions().sameOrigin();
-		
+
 //		http.addFilter(new JsonAuthenticationFilter(authenticationManager(), new
 //				ObjectMapper()));
+
+		http.httpBasic();
+		http.headers().frameOptions().sameOrigin();
 	}
-	
+
 	@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(utilisateurService);
-    }
-    
-    @Bean
-    public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    
-    @Bean
-    public static JdbcUserDetailsManager jdbcUserDetailsManager() {
-        JdbcUserDetailsManager userDetailsService = new JdbcUserDetailsManager();
-        userDetailsService.setDataSource(getDataSource());
-        return userDetailsService;
-    }
+	}
+
+	@Bean
+	public static PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public static JdbcUserDetailsManager jdbcUserDetailsManager() {
+		JdbcUserDetailsManager userDetailsService = new JdbcUserDetailsManager();
+		userDetailsService.setDataSource(getDataSource());
+		return userDetailsService;
+	}
 
 	public static DataSource getDataSource() {
 		return dataSource;

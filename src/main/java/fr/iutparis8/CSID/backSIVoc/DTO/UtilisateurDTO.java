@@ -1,7 +1,5 @@
 package fr.iutparis8.CSID.backSIVoc.DTO;
 
-import java.util.ArrayList;
-
 import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
 public class UtilisateurDTO {
