@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.iutparis8.CSID.backSIVoc.Configuration.SecurityConfiguration;
 import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
-import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Mapper.UtilisateurMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Authentification;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
 import fr.iutparis8.CSID.backSIVoc.Service.ConnexionService;
+import fr.iutparis8.CSID.backSIVoc.domain.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
 @RestController

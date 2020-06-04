@@ -1,4 +1,4 @@
-package fr.iutparis8.CSID.backSIVoc.Entités;
+package fr.iutparis8.CSID.backSIVoc.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

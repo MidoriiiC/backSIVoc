@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,12 +12,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import fr.iutparis8.CSID.backSIVoc.Configuration.SecurityConfiguration;
-import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Mapper.UtilisateurMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.BlocPassword;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
 import fr.iutparis8.CSID.backSIVoc.Repository.UtilisateurEntityRepository;
 import fr.iutparis8.CSID.backSIVoc.Repository.UtilisateurRepository;
+import fr.iutparis8.CSID.backSIVoc.domain.UtilisateurEntity;
 
 @Service
 public class UtilisateurService implements UserDetailsService {
@@ -77,8 +76,9 @@ public class UtilisateurService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Objects.requireNonNull(username);
-		UtilisateurEntity user = uer.findOneByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		return user;
+		//UtilisateurEntity user = uer.findOneByUsername(username)
+		//.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		
+		return null;
 	}
 }

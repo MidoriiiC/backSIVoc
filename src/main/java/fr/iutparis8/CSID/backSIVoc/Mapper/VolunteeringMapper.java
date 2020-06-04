@@ -3,8 +3,8 @@ package fr.iutparis8.CSID.backSIVoc.Mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.iutparis8.CSID.backSIVoc.Entités.VolunteeringEntity;
 import fr.iutparis8.CSID.backSIVoc.Objets.Volunteering;
+import fr.iutparis8.CSID.backSIVoc.domain.VolunteeringEntity;
 
 public class VolunteeringMapper {
 

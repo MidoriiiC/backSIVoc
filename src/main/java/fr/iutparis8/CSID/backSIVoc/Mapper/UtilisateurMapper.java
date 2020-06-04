@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
-import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
+import fr.iutparis8.CSID.backSIVoc.domain.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 
 public class UtilisateurMapper {

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.iutparis8.CSID.backSIVoc.DTO.ArticleDTO;
-import fr.iutparis8.CSID.backSIVoc.Entités.ArticleEntity;
 import fr.iutparis8.CSID.backSIVoc.Objets.Article;
+import fr.iutparis8.CSID.backSIVoc.domain.ArticleEntity;
 
 public class ArticleMapper {
 

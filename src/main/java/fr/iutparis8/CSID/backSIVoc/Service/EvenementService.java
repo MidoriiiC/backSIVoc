@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.iutparis8.CSID.backSIVoc.Entités.EvenementEntite;
 import fr.iutparis8.CSID.backSIVoc.Mapper.EvenementMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Evenement;
 import fr.iutparis8.CSID.backSIVoc.Repository.EvenementRepository;
+import fr.iutparis8.CSID.backSIVoc.domain.EvenementEntite;
 
 @Service
 public class EvenementService {

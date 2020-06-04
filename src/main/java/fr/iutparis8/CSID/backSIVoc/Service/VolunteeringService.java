@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.iutparis8.CSID.backSIVoc.Entités.EvenementEntite;
-import fr.iutparis8.CSID.backSIVoc.Entités.VolunteeringEntity;
 import fr.iutparis8.CSID.backSIVoc.Mapper.VolunteeringMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Volunteering;
 import fr.iutparis8.CSID.backSIVoc.Repository.VolunteeringRepository;
+import fr.iutparis8.CSID.backSIVoc.domain.EvenementEntite;
+import fr.iutparis8.CSID.backSIVoc.domain.VolunteeringEntity;
 
 @Service
 public class VolunteeringService {

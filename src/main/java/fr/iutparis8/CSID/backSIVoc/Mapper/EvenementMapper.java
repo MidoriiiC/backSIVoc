@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.iutparis8.CSID.backSIVoc.DTO.EvenementDTO;
-import fr.iutparis8.CSID.backSIVoc.Entités.EvenementEntite;
 import fr.iutparis8.CSID.backSIVoc.Objets.Evenement;
+import fr.iutparis8.CSID.backSIVoc.domain.EvenementEntite;
 
 public class EvenementMapper {
 	public static Evenement entiteVersObjet(EvenementEntite evenement) {

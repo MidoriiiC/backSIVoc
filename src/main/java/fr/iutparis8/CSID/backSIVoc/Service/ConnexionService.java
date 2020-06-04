@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import fr.iutparis8.CSID.backSIVoc.DTO.UtilisateurDTO;
-import fr.iutparis8.CSID.backSIVoc.Entités.UtilisateurEntity;
 import fr.iutparis8.CSID.backSIVoc.Mapper.UtilisateurMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
 import fr.iutparis8.CSID.backSIVoc.Repository.UtilisateurEntityRepository;
+import fr.iutparis8.CSID.backSIVoc.domain.UtilisateurEntity;
 
 @Service
 public class ConnexionService implements UserDetailsService {

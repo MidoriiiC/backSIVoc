@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.iutparis8.CSID.backSIVoc.Entités.ArticleEntity;
 import fr.iutparis8.CSID.backSIVoc.Mapper.ArticleMapper;
 import fr.iutparis8.CSID.backSIVoc.Objets.Article;
 import fr.iutparis8.CSID.backSIVoc.Repository.ArticleRepository;
+import fr.iutparis8.CSID.backSIVoc.domain.ArticleEntity;
 
 @Service
 public class ArticleService {
