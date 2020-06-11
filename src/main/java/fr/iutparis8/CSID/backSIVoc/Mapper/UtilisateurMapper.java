@@ -44,6 +44,7 @@ public class UtilisateurMapper {
 	}
 
 	public static Utilisateur utilisateurEntityToUtilisateur(UtilisateurEntity uent) { // 3
+		if(uent == null) return null;
 		Utilisateur u = new Utilisateur();
 		u.setId(uent.getId());
 		u.setNom(uent.getUsername());
@@ -55,6 +56,7 @@ public class UtilisateurMapper {
 	}
 
 	public static UtilisateurDTO utilisateurToUtilisateurDTO(Utilisateur e) { // 4
+		if(e == null) return null;
 		UtilisateurDTO dto = new UtilisateurDTO(e.getId());
 		dto.setNom(e.getNom());
 		dto.setPrenom(e.getPrenom());
