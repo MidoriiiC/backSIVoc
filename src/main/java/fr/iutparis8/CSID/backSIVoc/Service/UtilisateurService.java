@@ -76,9 +76,7 @@ public class UtilisateurService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Objects.requireNonNull(username);
-		//UtilisateurEntity user = uer.findOneByUsername(username)
-		//.orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		
-		return null;
+		UtilisateurEntity user = uer.findOneByUsername(username);
+		return user;
 	}
 }

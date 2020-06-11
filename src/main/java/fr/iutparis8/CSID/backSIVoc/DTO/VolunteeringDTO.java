@@ -1,13 +1,9 @@
 package fr.iutparis8.CSID.backSIVoc.DTO;
 
-import fr.iutparis8.CSID.backSIVoc.Objets.Evenement;
-import fr.iutparis8.CSID.backSIVoc.Objets.Utilisateur;
-
 public class VolunteeringDTO {
 	
 	private int idVolunteering;
 	
-	private EvenementDTO event;
 	
 	private String label;
 	
@@ -21,11 +17,10 @@ public class VolunteeringDTO {
 		
 	}
 
-	public VolunteeringDTO(int idVolunteering, EvenementDTO event, String label, UtilisateurDTO volunteer,
+	public VolunteeringDTO(int idVolunteering, String label, UtilisateurDTO volunteer,
 			String description, String scheldule) {
 		super();
 		this.idVolunteering = idVolunteering;
-		this.event = event;
 		this.label = label;
 		this.volunteer = volunteer;
 		this.description = description;
@@ -38,14 +33,6 @@ public class VolunteeringDTO {
 
 	public void setIdVolunteering(int idVolunteering) {
 		this.idVolunteering = idVolunteering;
-	}
-
-	public EvenementDTO getEvent() {
-		return event;
-	}
-
-	public void setEvent(EvenementDTO event) {
-		this.event = event;
 	}
 
 	public String getLabel() {

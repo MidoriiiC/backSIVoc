@@ -1,5 +1,7 @@
 package fr.iutparis8.CSID.backSIVoc.Objets;
 
+import java.util.List;
+
 public class Evenement {
 
 	private int id;
@@ -10,11 +12,12 @@ public class Evenement {
 	private String date, heure;
 	private String lieu;
 	private String organisateur;
+	private List<Volunteering> volontaires;
 	
 	
 	
 	public Evenement(int id, String nom, String contenuArticle, String image, String lienVideo, String date,
-			String heure, String lieu, String organisateur) {
+			String heure, String lieu, String organisateur, List<Volunteering> volontaires) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -25,6 +28,7 @@ public class Evenement {
 		this.heure = heure;
 		this.lieu = lieu;
 		this.organisateur = organisateur;
+		this.volontaires = volontaires;
 	}
 
 	public int getId() {
@@ -97,6 +101,14 @@ public class Evenement {
 
 	public void setOrganisateur(String organisateur) {
 		this.organisateur = organisateur;
+	}
+
+	public List<Volunteering> getVolontaires() {
+		return volontaires;
+	}
+
+	public void setVolontaires(List<Volunteering> volontaires) {
+		this.volontaires = volontaires;
 	}
 
 	

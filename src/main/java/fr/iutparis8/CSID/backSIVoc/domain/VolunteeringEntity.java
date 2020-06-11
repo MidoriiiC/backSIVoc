@@ -2,9 +2,11 @@ package fr.iutparis8.CSID.backSIVoc.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,12 +22,14 @@ public class VolunteeringEntity {
 	private int idVolunteering;
 	
 	@ManyToOne
+	@JoinColumn(name="event_id")
 	private EvenementEntite event;
 	
 	@Column(name="label")
 	private String label;
 	
-	@Column(name="volunteer")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="volunteer_id")
 	private UtilisateurEntity volunteer;
 	
 	@Column(name="description")
@@ -38,11 +42,10 @@ public class VolunteeringEntity {
 		
 	}
 
-	public VolunteeringEntity(int idVolunteering, EvenementEntite event, String label, UtilisateurEntity volunteer,
+	public VolunteeringEntity(int idVolunteering, String label, UtilisateurEntity volunteer,
 			String description, String scheldule) {
 		super();
 		this.idVolunteering = idVolunteering;
-		this.event = event;
 		this.label = label;
 		this.volunteer = volunteer;
 		this.description = description;
@@ -96,6 +99,4 @@ public class VolunteeringEntity {
 	public void setScheldule(String scheldule) {
 		this.scheldule = scheldule;
 	}
-
-	
 }

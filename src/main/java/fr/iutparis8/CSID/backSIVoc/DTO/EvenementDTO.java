@@ -1,5 +1,7 @@
 package fr.iutparis8.CSID.backSIVoc.DTO;
 
+import java.util.List;
+
 public class EvenementDTO {
 	
 	private int id;
@@ -10,13 +12,14 @@ public class EvenementDTO {
 	private String date, heure;
 	private String lieu;
 	private String organisateur;
+	private List<VolunteeringDTO> volontaires;
 	
 	public EvenementDTO() {
 		
 	}
 	
 	public EvenementDTO(int id, String nom, String contenuArticle, String image, String lienVideo, String date,
-			String heure, String lieu, String organisateur) {
+			String heure, String lieu, String organisateur, List<VolunteeringDTO> volontaires) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -27,6 +30,7 @@ public class EvenementDTO {
 		this.heure = heure;
 		this.lieu = lieu;
 		this.organisateur = organisateur;
+		this.volontaires = volontaires;
 	}
 
 	public int getId() {
@@ -99,6 +103,14 @@ public class EvenementDTO {
 
 	public void setOrganisateur(String organisateur) {
 		this.organisateur = organisateur;
+	}
+
+	public List<VolunteeringDTO> getVolontaires() {
+		return volontaires;
+	}
+
+	public void setVolontaires(List<VolunteeringDTO> volontaires) {
+		this.volontaires = volontaires;
 	}
 
 	

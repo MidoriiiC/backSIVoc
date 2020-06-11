@@ -9,27 +9,28 @@ import fr.iutparis8.CSID.backSIVoc.domain.EvenementEntite;
 
 public class EvenementMapper {
 	public static Evenement entiteVersObjet(EvenementEntite evenement) {
+		System.out.println(evenement.getVolontaires());
 		return new Evenement(evenement.getId(), evenement.getNom(), evenement.getContenuArticle(),
 				evenement.getImage(), evenement.getLienVideo(), evenement.getDate(), evenement.getHeure(),
-				evenement.getLieu(), evenement.getOrganisateur());
+				evenement.getLieu(), evenement.getOrganisateur(), VolunteeringMapper.listEntityToListObject(evenement.getVolontaires()));
 	}
 	
 	public static EvenementDTO objetVersDto(Evenement evenement) {
 		return new EvenementDTO(evenement.getId(), evenement.getNom(), evenement.getContenuArticle(),
 				evenement.getImage(), evenement.getLienVideo(), evenement.getDate(), evenement.getHeure(),
-				evenement.getLieu(), evenement.getOrganisateur());
+				evenement.getLieu(), evenement.getOrganisateur(), VolunteeringMapper.listObjectToListDTO(evenement.getVolontaires()));
 	}
 	
 	public static EvenementEntite objetVersEntite(Evenement evenement) {
 		return new EvenementEntite(evenement.getId(), evenement.getNom(), evenement.getContenuArticle(),
 				evenement.getImage(), evenement.getLienVideo(), evenement.getDate(), evenement.getHeure(),
-				evenement.getLieu(), evenement.getOrganisateur());
+				evenement.getLieu(), evenement.getOrganisateur(), VolunteeringMapper.listObjectToListEntity(evenement.getVolontaires()));
 	}
 	
 	public static Evenement DtoVersObjet(EvenementDTO evenement) {
 		return new Evenement(evenement.getId(), evenement.getNom(), evenement.getContenuArticle(),
 				evenement.getImage(), evenement.getLienVideo(), evenement.getDate(), evenement.getHeure(),
-				evenement.getLieu(), evenement.getOrganisateur());
+				evenement.getLieu(), evenement.getOrganisateur(), VolunteeringMapper.listDTOToListObject(evenement.getVolontaires()));
 	}
 
 	public static List<Evenement> listeEntiteVersListeObjet(List<EvenementEntite> evenements) {
@@ -37,7 +38,7 @@ public class EvenementMapper {
 		for(EvenementEntite evenement: evenements) {
 			evenementsObjet.add(new Evenement(evenement.getId(), evenement.getNom(), evenement.getContenuArticle(),
 				evenement.getImage(), evenement.getLienVideo(), evenement.getDate(), evenement.getHeure(),
-				evenement.getLieu(), evenement.getOrganisateur()));
+				evenement.getLieu(), evenement.getOrganisateur(), VolunteeringMapper.listEntityToListObject(evenement.getVolontaires())));
 		}
 		return evenementsObjet;
 	}
@@ -47,7 +48,7 @@ public class EvenementMapper {
 		for(Evenement evenement: evenements) {
 			evenementsDTO.add(new EvenementDTO(evenement.getId(), evenement.getNom(), evenement.getContenuArticle(),
 				evenement.getImage(), evenement.getLienVideo(), evenement.getDate(), evenement.getHeure(),
-				evenement.getLieu(), evenement.getOrganisateur()));
+				evenement.getLieu(), evenement.getOrganisateur(), VolunteeringMapper.listObjectToListDTO(evenement.getVolontaires())));
 		}
 		return evenementsDTO;
 	}

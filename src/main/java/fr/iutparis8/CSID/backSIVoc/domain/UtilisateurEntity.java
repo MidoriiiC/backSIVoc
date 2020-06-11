@@ -3,6 +3,7 @@ package fr.iutparis8.CSID.backSIVoc.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -42,7 +44,7 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 	@Column(name = "username", nullable = false)
 	@NotNull
 	private String username;
-	
+
 	@Column(name = "firstname", nullable = false)
 	@NotNull
 	private String firstname;
@@ -54,28 +56,28 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 	@Column(name = "email", nullable = false)
 	@NotNull
 	private String email;
-	
+
 	// nullable = false
 	@Column(name = "authorities")
 	@Enumerated(EnumType.STRING)
 	private RoleEnum role;
 
-	@Column(name = "account_non_locked")
+	@Column(name = "account_not_locked")
 	private boolean accountNonLocked;
 
-	@Column(name = "credentials_non_expired")
+	@Column(name = "credentials_not_expired")
 	private boolean credentialsNonExpired;
 
 	@Column(name = "enabled")
 	private boolean enabled;
 
-	@Column(name = "account_non_expired")
+	@Column(name = "account_not_expired")
 	private boolean accountNonExpired;
 
 	@Column(name = "token")
 	private String token;
 
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
@@ -83,7 +85,7 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 		return role;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -98,7 +100,7 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 	public void setRole(RoleEnum r) {
 		this.role = r;
 	}
-	
+
 	public String getFirstname() {
 		return firstname;
 	}
@@ -176,6 +178,7 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
 	public String getToken() {
 		return this.token;
 	}
