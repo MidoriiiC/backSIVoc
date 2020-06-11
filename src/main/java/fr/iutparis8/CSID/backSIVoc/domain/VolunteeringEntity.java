@@ -23,7 +23,7 @@ public class VolunteeringEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="event_id")
-	private EvenementEntite event;
+	private EventEntity event;
 	
 	@Column(name="label")
 	private String label;
@@ -60,11 +60,11 @@ public class VolunteeringEntity {
 		this.idVolunteering = idVolunteering;
 	}
 
-	public EvenementEntite getEvent() {
+	public EventEntity getEvent() {
 		return event;
 	}
 
-	public void setEvent(EvenementEntite event) {
+	public void setEvent(EventEntity event) {
 		this.event = event;
 	}
 
