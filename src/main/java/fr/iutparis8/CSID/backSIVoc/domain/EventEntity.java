@@ -22,13 +22,13 @@ public class EventEntity {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "contentArticle")
+	@Column(name = "contentarticle")
 	private String contentArticle;
 
 	@Column(name = "image")
 	private String image;
 
-	@Column(name = "linkVideo")
+	@Column(name = "linkvideo")
 	private String linkVideo;
 
 	@Column(name = "date_event")
