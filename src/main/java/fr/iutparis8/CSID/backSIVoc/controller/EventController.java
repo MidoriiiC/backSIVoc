@@ -23,12 +23,12 @@ import fr.iutparis8.CSID.backSIVoc.service.EventService;
 @Transactional
 @RestController
 @RequestMapping("/events")
-public class EventControlleur {
+public class EventController {
 	
 	private EventService service;
 	
 	@Autowired
-	public EventControlleur(EventService es) {
+	public EventController(EventService es) {
 		this.service = es;
 	}
 	

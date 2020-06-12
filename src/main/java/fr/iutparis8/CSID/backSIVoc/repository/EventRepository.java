@@ -8,6 +8,6 @@ import fr.iutparis8.CSID.backSIVoc.domain.EventEntity;
 @Repository
 public interface EventRepository extends JpaRepository<EventEntity,Integer>{
 
-	EventEntity findByNom(String nom);
+	EventEntity findByName(String name);
 
 }
