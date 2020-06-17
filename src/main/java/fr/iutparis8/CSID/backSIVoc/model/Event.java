@@ -112,8 +112,6 @@ public class Event {
 	public void setVolunteerings(List<Volunteering> volunteerings) {
 		this.volunteerings = volunteerings;
 	}
-
-	
 	
 	
 }

@@ -9,5 +9,5 @@ public class BackSiVocApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackSiVocApplication.class, args);
 	}
-
+	
 }

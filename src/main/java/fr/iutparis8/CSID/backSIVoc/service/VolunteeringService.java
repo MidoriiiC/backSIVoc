@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import fr.iutparis8.CSID.backSIVoc.domain.EventEntity;
 import fr.iutparis8.CSID.backSIVoc.domain.VolunteeringEntity;
+import fr.iutparis8.CSID.backSIVoc.mapper.EventMapper;
 import fr.iutparis8.CSID.backSIVoc.mapper.VolunteeringMapper;
+import fr.iutparis8.CSID.backSIVoc.model.Event;
 import fr.iutparis8.CSID.backSIVoc.model.Volunteering;
 import fr.iutparis8.CSID.backSIVoc.repository.VolunteeringRepository;
 
@@ -25,6 +27,11 @@ public class VolunteeringService {
 		List<VolunteeringEntity> result = this.vr.findByEvent(e); 
 		
 		return VolunteeringMapper.listEntityToListObject(result);
+	}
+	
+	public Volunteering modify(Volunteering v) {
+		VolunteeringEntity volunteeringModified = this.vr.save(VolunteeringMapper.objectToEntity((v)));
+        return VolunteeringMapper.entityToObject(volunteeringModified);
 	}
 
 }

@@ -8,16 +8,19 @@ import org.springframework.stereotype.Service;
 import fr.iutparis8.CSID.backSIVoc.domain.EventEntity;
 import fr.iutparis8.CSID.backSIVoc.mapper.EventMapper;
 import fr.iutparis8.CSID.backSIVoc.model.Event;
+import fr.iutparis8.CSID.backSIVoc.model.Volunteering;
 import fr.iutparis8.CSID.backSIVoc.repository.EventRepository;
 
 @Service
 public class EventService {
 
 	private EventRepository er;
+	private VolunteeringService vs;
 	
 	@Autowired
-	public EventService(EventRepository er) {
+	public EventService(EventRepository er, VolunteeringService vs) {
 		this.er = er;
+		this.vs = vs;
 	}
 	
 	public Event getEventById(Integer id) {
@@ -36,5 +39,10 @@ public class EventService {
 	public List<Event> getAllEvents() {
 		List<EventEntity> events = this.er.findAll();
 		return EventMapper.listEntityToListObject(events);
+	}
+	
+	public boolean addVolunteer(Volunteering v) {
+		this.vs.modify(v);
+		return true;
 	}
 }

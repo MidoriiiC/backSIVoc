@@ -13,18 +13,21 @@ public class Volunteering {
 	
 	private String scheldule;
 	
+	private int eventId;
+	
 	public Volunteering() {
 		
 	}
 
 	public Volunteering(int idVolunteering, String label, Utilisateur volunteer,
-			String description, String scheldule) {
+			String description, String scheldule, int eventId) {
 		super();
 		this.idVolunteering = idVolunteering;
 		this.label = label;
 		this.volunteer = volunteer;
 		this.description = description;
 		this.scheldule = scheldule;
+		this.eventId = eventId;
 	}
 
 	public int getIdVolunteering() {
@@ -67,6 +70,17 @@ public class Volunteering {
 	public void setScheldule(String scheldule) {
 		this.scheldule = scheldule;
 	}
+	
+
+	public int getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
+	}
+
+	
 
 	
 }

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.iutparis8.CSID.backSIVoc.dto.EventDTO;
+import fr.iutparis8.CSID.backSIVoc.dto.VolunteeringDTO;
 import fr.iutparis8.CSID.backSIVoc.mapper.EventMapper;
+import fr.iutparis8.CSID.backSIVoc.mapper.VolunteeringMapper;
 import fr.iutparis8.CSID.backSIVoc.model.Event;
 import fr.iutparis8.CSID.backSIVoc.service.EventService;
 
@@ -65,5 +67,13 @@ public class EventController {
 		List<EventDTO> listDTO = EventMapper.listObjectToListDTO(listE);
 		return listDTO;
 	}
-
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/{id}/addVolunteer")
+	public boolean addVolunteer(@PathVariable int id, @RequestBody VolunteeringDTO v) {
+		System.out.println(v.getVolunteer().getId());
+		v.setEventId(id);
+		return this.service.addVolunteer(VolunteeringMapper.DTOToObject(v));
+		
+	}
 }

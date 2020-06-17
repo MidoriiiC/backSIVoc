@@ -3,6 +3,7 @@ package fr.iutparis8.CSID.backSIVoc.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.iutparis8.CSID.backSIVoc.domain.EventEntity;
 import fr.iutparis8.CSID.backSIVoc.domain.VolunteeringEntity;
 import fr.iutparis8.CSID.backSIVoc.dto.VolunteeringDTO;
 import fr.iutparis8.CSID.backSIVoc.model.Volunteering;
@@ -49,22 +50,24 @@ public class VolunteeringMapper {
 	//String description, String scheldule)
 	public static Volunteering entityToObject(VolunteeringEntity v) {
 		return new Volunteering(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurEntityToUtilisateur(v.getVolunteer()),
-				v.getDescription(), v.getScheldule());
+				v.getDescription(), v.getScheldule(), v.getEvent().getId());
 	}
 	
 	public static VolunteeringDTO objectToDTO(Volunteering v) {
 		return new VolunteeringDTO(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurToUtilisateurDTO(v.getVolunteer()),
-				v.getDescription(), v.getScheldule());
+				v.getDescription(), v.getScheldule(), v.getEventId());
 	}
 	
 	public static Volunteering DTOToObject(VolunteeringDTO v) {
 		return new Volunteering(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurDTOtoUtilisateur(v.getVolunteer()),
-				v.getDescription(), v.getScheldule());
+				v.getDescription(), v.getScheldule(), v.getEventId());
 	}
 	
 	public static VolunteeringEntity objectToEntity(Volunteering v) {
+		EventEntity e = new EventEntity();
+		e.setId(v.getEventId());
 		return new VolunteeringEntity(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurToUtilisateurEntity(v.getVolunteer()),
-				v.getDescription(), v.getScheldule());
+				v.getDescription(), v.getScheldule(), e);
 	}
 	
 }

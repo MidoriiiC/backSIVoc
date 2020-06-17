@@ -41,7 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.permitAll().antMatchers("/connexion").permitAll().antMatchers("/connexion/creationlambda").permitAll()
 				.antMatchers("/connexion/creation").permitAll().antMatchers("/utilisateurs").permitAll()
 				.antMatchers("/utilisateurs/whoami").permitAll().antMatchers("/utilisateurs/whoami2").authenticated()
-				.antMatchers("/events/*").permitAll().antMatchers("/articles/*").permitAll()
+				.antMatchers("/events/*").permitAll().antMatchers("/events/*/*").permitAll()
+				.antMatchers("/articles/*").permitAll()
 				.antMatchers("/utilisateurs/whoami3").hasAuthority("ROLE_CAN_DO_WHOAMI")
 
 				.anyRequest().authenticated()
