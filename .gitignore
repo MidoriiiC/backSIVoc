@@ -1,7 +1,10 @@
 
 target/
+<<<<<<< HEAD
 bin/
 .project
+=======
+>>>>>>> d277516d41083600135b27546496ce6d01775701
 .classpath
 .settings
 src/main/resources/*
