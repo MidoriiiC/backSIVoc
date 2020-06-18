@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import fr.iutparis8.CSID.backSIVoc.configuration.SecurityConfiguration;
 import fr.iutparis8.CSID.backSIVoc.domain.UtilisateurEntity;
+import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
 import fr.iutparis8.CSID.backSIVoc.mapper.UtilisateurMapper;
 import fr.iutparis8.CSID.backSIVoc.model.BlocPassword;
 import fr.iutparis8.CSID.backSIVoc.model.Utilisateur;
@@ -37,13 +38,6 @@ public class UtilisateurService implements UserDetailsService {
 		u = UtilisateurMapper.utilisateurEntityToUtilisateur(retour);
 		return u;
 	}
-	
-//	public Utilisateur getUtilisateurParNom(String nom) {
-//		Optional<UtilisateurEntity> uent = this.uer.findOneByUsername(nom);
-//		if (uent!=null)
-//		Utilisateur e = UtilisateurMapper.utilisateurEntityToUtilisateur(uent);
-//		return e;
-//	}
 	
 	public List<Utilisateur> getAllUtilisateurs() {
 		List<UtilisateurEntity> listUent = this.ur.findAll();
@@ -78,5 +72,22 @@ public class UtilisateurService implements UserDetailsService {
 		Objects.requireNonNull(username);
 		UtilisateurEntity user = uer.findOneByUsername(username);
 		return user;
+	}
+	
+	public Utilisateur creerUtilisateurRoled(Utilisateur u) {
+		if(u.getNom().equals("admin"))
+			u.setRole("administrateur");
+		if(u.getNom().equals("modo"))
+			u.setRole("modérateur");
+		if(u.getNom().equals("benev"))
+			u.setRole("bénévole");
+		
+		UtilisateurEntity uent = UtilisateurMapper.utilisateurToUtilisateurEntity(u);
+		System.out.println("création utilisateur "+ uent.getUsername());
+		
+		System.out.println("son rôle :" + uent.getRole());
+		UtilisateurEntity retour = ur.save(uent);
+		u = UtilisateurMapper.utilisateurEntityToUtilisateur(retour);
+		return u;
 	}
 }

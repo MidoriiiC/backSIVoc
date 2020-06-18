@@ -9,7 +9,7 @@ public class Utilisateur{
 	private String prenom;
 	private String email;
 	private String motDePasse;
-	private RoleEnum role;
+	private String role;
 
 
 	public int getId() {
@@ -39,10 +39,10 @@ public class Utilisateur{
 		this.motDePasse = motDePasse;
 	}
 	
-	public void setRole(RoleEnum r) {
-		this.role = r;
+	public void setRole(String string) {
+		this.role = string;
 	}
-	public RoleEnum getRole() {
+	public String getRole() {
 		return this.role;
 	}
 

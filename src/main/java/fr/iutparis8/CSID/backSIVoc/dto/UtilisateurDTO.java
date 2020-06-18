@@ -1,7 +1,5 @@
 package fr.iutparis8.CSID.backSIVoc.dto;
 
-import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
-
 public class UtilisateurDTO {
 
 	private int id;
@@ -9,7 +7,7 @@ public class UtilisateurDTO {
 	private String prenom;
 	private String email;
 	private String mdp;
-	private RoleEnum role;
+	private String role;
 
 	public int getId() {
 		return this.id;
@@ -42,12 +40,12 @@ public class UtilisateurDTO {
 		this.id = id2;
 	}
 
-	public RoleEnum getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(RoleEnum role) {
-		this.role = role;
+	public void setRole(String string) {
+		this.role = string;
 	}
 
 	public String getPrenom() {

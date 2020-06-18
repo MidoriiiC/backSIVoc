@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -120,11 +121,23 @@ public class UtilisateurControleur {
 		}
 		return ResponseEntity.badRequest().build();
 	}
+	
+	@CrossOrigin(origins = "*")
 	@GetMapping
 	public List<UtilisateurDTO> getAllUtilisateurs() {
 		List<Utilisateur> listU = this.service.getAllUtilisateurs();
 		List<UtilisateurDTO> listDTO = UtilisateurMapper.listUtilisateurToUtilisateurDTO(listU);
 		return listDTO;
 	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/roled")
+	public ResponseEntity<?> creerUnCompteRoled(@RequestBody UtilisateurDTO dto){
+		Utilisateur u = UtilisateurMapper.utilisateurDTOtoUtilisateur(dto);
+		Utilisateur reponse = this.service.creerUtilisateurRoled(u);
+		if(reponse.getNom()==dto.getNom())
+			return ResponseEntity.created(null).build();
+		return ResponseEntity.badRequest().build();
+		}
 
 }

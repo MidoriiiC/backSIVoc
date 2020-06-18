@@ -18,6 +18,7 @@ public class UtilisateurMapper {
 		u.setNom(dto.getNom());
 		u.setPrenom(dto.getPrenom());
 		u.setEmail(dto.getEmail());
+		System.out.println("role du dto: " +dto.getRole());
 		u.setRole(dto.getRole());
 		u.setMdp(dto.getMdp());
 		return u;
@@ -32,7 +33,7 @@ public class UtilisateurMapper {
 		uent.setPassword(u.getMdp());
 		uent.setEmail(u.getEmail());
 		uent.setFirstname(u.getPrenom());
-		uent.setRole(u.getRole());
+		uent.setRole(stringInterceptorToRoleEnum(u.getRole()));
 
 		uent.setAccountNonLocked(true);
 		uent.setCredentialsNonExpired(true);
@@ -51,7 +52,7 @@ public class UtilisateurMapper {
 		u.setMdp(uent.getPassword());
 		u.setEmail(uent.getEmail());
 		u.setPrenom(uent.getFirstname());
-		u.setRole(uent.getRole());
+		u.setRole(roleEnumInterceptorToString(uent.getRole()));
 		return u;
 	}
 
@@ -69,8 +70,8 @@ public class UtilisateurMapper {
 	public static List<Utilisateur> listeUtilisateurEntityToUtilisateur(List<UtilisateurEntity> listUent) {
 		List<Utilisateur> listU = new ArrayList<Utilisateur>();
 		for (Iterator<UtilisateurEntity> it = listUent.iterator(); it.hasNext();) {
-			Utilisateur e = UtilisateurMapper.utilisateurEntityToUtilisateur(it.next());
-			listU.add(e);
+			Utilisateur u = UtilisateurMapper.utilisateurEntityToUtilisateur(it.next());
+			listU.add(u);
 		}
 		return listU;
 	}
@@ -79,9 +80,56 @@ public class UtilisateurMapper {
 		List<UtilisateurDTO> listDTO = new ArrayList<UtilisateurDTO>();
 		for (Iterator<Utilisateur> it = listU.iterator(); it.hasNext();) {
 			UtilisateurDTO u = UtilisateurMapper.utilisateurToUtilisateurDTO(it.next());
+			
 			listDTO.add(u);
 		}
 		return listDTO;
+	}
+
+	private static String roleEnumInterceptorToString(RoleEnum role) {
+		switch(role) {
+			case ROLE_ADMINISTRATEUR :{
+				return "administrateur";
+			}
+			case ROLE_MODERATEUR :{
+				return "modérateur";
+			}
+			case ROLE_UTILISATEUR :{
+				return "utilisateur";
+			}
+			case ROLE_BENEVOLE :{
+				return "bénévole";
+			}
+			case ROLE_PRETRE :{
+				return "prêtre";
+			}
+		default:
+			return null;
+			
+		}
+	}
+	private static RoleEnum stringInterceptorToRoleEnum(String role) {
+		System.out.println(role);
+		switch(role) {
+			case  "administrateur":{
+				return RoleEnum.ROLE_ADMINISTRATEUR;
+			}
+			case "modérateur" :{
+				return RoleEnum.ROLE_MODERATEUR;
+			}
+			case "utilisateur" :{
+				return RoleEnum.ROLE_UTILISATEUR;
+			}
+			case "bénévole" :{
+				return RoleEnum.ROLE_BENEVOLE;
+			}
+			case "prêtre" :{
+				return RoleEnum.ROLE_PRETRE;
+			}
+		default:
+			return null;
+			
+		}
 	}
 
 }

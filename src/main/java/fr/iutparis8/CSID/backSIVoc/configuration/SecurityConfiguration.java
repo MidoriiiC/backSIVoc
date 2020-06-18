@@ -44,6 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/events/*").permitAll().antMatchers("/events/*/*").permitAll()
 				.antMatchers("/articles/*").permitAll()
 				.antMatchers("/utilisateurs/whoami3").hasAuthority("ROLE_CAN_DO_WHOAMI")
+				.antMatchers("/utilisateurs/roled").permitAll()
+				.antMatchers("/utilisateurs").permitAll()
 
 				.anyRequest().authenticated()
 

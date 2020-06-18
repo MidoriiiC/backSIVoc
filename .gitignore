@@ -1,5 +1,8 @@
 
 target/
+bin/
 .project
 .classpath
 .settings
+src/main/resources/*
+
