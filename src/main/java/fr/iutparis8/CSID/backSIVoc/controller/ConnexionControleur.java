@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.iutparis8.CSID.backSIVoc.domain.UtilisateurEntity;
-import fr.iutparis8.CSID.backSIVoc.dto.UtilisateurDTO;
-import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
-import fr.iutparis8.CSID.backSIVoc.mapper.UtilisateurMapper;
+import fr.iutparis8.CSID.backSIVoc.domain.UserEntity;
+import fr.iutparis8.CSID.backSIVoc.dto.UserDTO;
+import fr.iutparis8.CSID.backSIVoc.mapper.UserMapper;
 import fr.iutparis8.CSID.backSIVoc.model.Authentification;
-import fr.iutparis8.CSID.backSIVoc.model.Utilisateur;
+import fr.iutparis8.CSID.backSIVoc.model.User;
 import fr.iutparis8.CSID.backSIVoc.service.ConnexionService;
 
 @RestController
@@ -38,11 +37,11 @@ public class ConnexionControleur {
 	public ResponseEntity<?> getConnexion(@RequestBody Authentification auth) {
 		//auth.setMdp(SecurityConfiguration.passwordEncoder().encode(auth.getMdp()));
 		if (auth != null) {
-			UtilisateurEntity ue = this.service.loadUserByUsername(auth.getNom());
+			UserEntity ue = this.service.loadUserByUsername(auth.getName());
 			if (ue != null) {
-				Utilisateur u = UtilisateurMapper.utilisateurEntityToUtilisateur(ue);
-				UtilisateurDTO dto = UtilisateurMapper.utilisateurToUtilisateurDTO(u);
-				if (auth.getNom().equals(dto.getNom()) && auth.getMdp().equals(dto.getMdp()))
+				User u = UserMapper.userEntityToUser(ue);
+				UserDTO dto = UserMapper.userToUserDTO(u);
+				if (auth.getName().equals(dto.getName()) && auth.getPassword().equals(dto.getPassword()))
 					return ResponseEntity.ok().body(dto);
 				}
 		}
@@ -52,10 +51,10 @@ public class ConnexionControleur {
 
 	@CrossOrigin(origins = "*")
 	@PostMapping("/creation")
-	public ResponseEntity<?> creationCompte(@RequestBody UtilisateurDTO auth) throws URISyntaxException {
-		auth.setRole("utilisateur");
-		Utilisateur reponse = this.service.creerUtilisateur(auth);
-		if (reponse.getNom() == auth.getNom()) {
+	public ResponseEntity<?> creationAccount(@RequestBody UserDTO auth) throws URISyntaxException {
+		auth.setAuthority("utilisateur");
+		User reponse = this.service.createUser(auth);
+		if (reponse.getName() == auth.getName()) {
 			return ResponseEntity.created(null).build();
 		}
 		return ResponseEntity.badRequest().build();
@@ -63,15 +62,15 @@ public class ConnexionControleur {
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping("/infos")
-	public UtilisateurDTO info() {
+	public UserDTO info() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUser = null;
 		if (authentication != null) {
 			currentUser = authentication.getName();
 		}
-		UtilisateurEntity ue = this.service.loadUserByUsername(currentUser);
-		Utilisateur u = UtilisateurMapper.utilisateurEntityToUtilisateur(ue);
-		UtilisateurDTO dto = UtilisateurMapper.utilisateurToUtilisateurDTO(u);
+		UserEntity ue = this.service.loadUserByUsername(currentUser);
+		User u = UserMapper.userEntityToUser(ue);
+		UserDTO dto = UserMapper.userToUserDTO(u);
 		return dto;
 	}
 

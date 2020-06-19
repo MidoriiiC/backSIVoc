@@ -4,7 +4,6 @@ public class UserCredentials {
 	
 	private String username;
 	private String password;
-	private String token;
 
 	public Object getUsername() {
 		return this.password;
@@ -12,9 +11,6 @@ public class UserCredentials {
 
 	public Object getPassword() {
 		return this.username;
-	}
-	public Object getToken() {
-		return this.token;
 	}
 
 }

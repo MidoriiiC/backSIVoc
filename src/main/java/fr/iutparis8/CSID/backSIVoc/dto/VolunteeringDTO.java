@@ -7,7 +7,7 @@ public class VolunteeringDTO {
 	
 	private String label;
 	
-	private UtilisateurDTO volunteer;
+	private UserDTO volunteer;
 	
 	private String description;
 	
@@ -19,7 +19,7 @@ public class VolunteeringDTO {
 		
 	}
 
-	public VolunteeringDTO(int idVolunteering, String label, UtilisateurDTO volunteer,
+	public VolunteeringDTO(int idVolunteering, String label, UserDTO volunteer,
 			String description, String scheldule, int eventId) {
 		super();
 		this.idVolunteering = idVolunteering;
@@ -46,11 +46,11 @@ public class VolunteeringDTO {
 		this.label = label;
 	}
 
-	public UtilisateurDTO getVolunteer() {
+	public UserDTO getVolunteer() {
 		return volunteer;
 	}
 
-	public void setVolunteer(UtilisateurDTO volunteer) {
+	public void setVolunteer(UserDTO volunteer) {
 		this.volunteer = volunteer;
 	}
 

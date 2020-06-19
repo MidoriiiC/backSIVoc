@@ -49,24 +49,24 @@ public class VolunteeringMapper {
 	//(int idVolunteering, Evenement event, String label, Utilisateur volunteer,
 	//String description, String scheldule)
 	public static Volunteering entityToObject(VolunteeringEntity v) {
-		return new Volunteering(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurEntityToUtilisateur(v.getVolunteer()),
+		return new Volunteering(v.getIdVolunteering(), v.getLabel(), UserMapper.userEntityToUser(v.getVolunteer()),
 				v.getDescription(), v.getScheldule(), v.getEvent().getId());
 	}
 	
 	public static VolunteeringDTO objectToDTO(Volunteering v) {
-		return new VolunteeringDTO(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurToUtilisateurDTO(v.getVolunteer()),
+		return new VolunteeringDTO(v.getIdVolunteering(), v.getLabel(), UserMapper.userToUserDTO(v.getVolunteer()),
 				v.getDescription(), v.getScheldule(), v.getEventId());
 	}
 	
 	public static Volunteering DTOToObject(VolunteeringDTO v) {
-		return new Volunteering(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurDTOtoUtilisateur(v.getVolunteer()),
+		return new Volunteering(v.getIdVolunteering(), v.getLabel(), UserMapper.userDTOtoUser(v.getVolunteer()),
 				v.getDescription(), v.getScheldule(), v.getEventId());
 	}
 	
 	public static VolunteeringEntity objectToEntity(Volunteering v) {
 		EventEntity e = new EventEntity();
 		e.setId(v.getEventId());
-		return new VolunteeringEntity(v.getIdVolunteering(), v.getLabel(), UtilisateurMapper.utilisateurToUtilisateurEntity(v.getVolunteer()),
+		return new VolunteeringEntity(v.getIdVolunteering(), v.getLabel(), UserMapper.userToUserEntity(v.getVolunteer()),
 				v.getDescription(), v.getScheldule(), e);
 	}
 	

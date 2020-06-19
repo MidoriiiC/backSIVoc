@@ -33,7 +33,7 @@ public class VolunteeringEntity{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="volunteer_id")
-	private UtilisateurEntity volunteer;
+	private UserEntity volunteer;
 	
 	@Column(name="description")
 	private String description;
@@ -45,7 +45,7 @@ public class VolunteeringEntity{
 		
 	}
 
-	public VolunteeringEntity(int idVolunteering, String label, UtilisateurEntity volunteer,
+	public VolunteeringEntity(int idVolunteering, String label, UserEntity volunteer,
 			String description, String scheldule, EventEntity e) {
 		super();
 		this.idVolunteering = idVolunteering;
@@ -80,11 +80,11 @@ public class VolunteeringEntity{
 		this.label = label;
 	}
 
-	public UtilisateurEntity getVolunteer() {
+	public UserEntity getVolunteer() {
 		return volunteer;
 	}
 
-	public void setVolunteer(UtilisateurEntity volunteer) {
+	public void setVolunteer(UserEntity volunteer) {
 		this.volunteer = volunteer;
 	}
 

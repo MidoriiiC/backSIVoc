@@ -2,27 +2,27 @@ package fr.iutparis8.CSID.backSIVoc.model;
 
 public class Authentification {
 	
-	private String nom;
-	private String mdp;
+	private String name;
+	private String password;
 	
 	public Authentification() {
 		
 	}
 
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getMdp() {
-		return mdp;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

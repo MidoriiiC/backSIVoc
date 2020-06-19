@@ -10,11 +10,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
-import fr.iutparis8.CSID.backSIVoc.service.UtilisateurService;
+import fr.iutparis8.CSID.backSIVoc.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private static DataSource dataSource;
 
 	@Autowired
-	UtilisateurService utilisateurService;
+	UserService userService;
 
 	public SecurityConfiguration(DataSource dataSource) {
 		SecurityConfiguration.dataSource = dataSource;
@@ -37,16 +35,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.formLogin().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers("/h2-console/**")
-				.permitAll().antMatchers("/connexion").permitAll().antMatchers("/connexion/creationlambda").permitAll()
-				.antMatchers("/connexion/creation").permitAll().antMatchers("/utilisateurs").permitAll()
-				.antMatchers("/utilisateurs/whoami").permitAll().antMatchers("/utilisateurs/whoami2").authenticated()
-				.antMatchers("/events/*").permitAll().antMatchers("/events/*/*").permitAll()
+		http.formLogin().disable().authorizeRequests()
+				.antMatchers("/").permitAll()
+				.antMatchers("/h2-console/**").permitAll()
+				.antMatchers("/connexion").permitAll()
+				.antMatchers("/connexion/creation").permitAll()
+				.antMatchers("/users/whoami").permitAll()
+				.antMatchers("/users/whoami2").authenticated()
+				.antMatchers("/users/whoami3").hasAuthority("ROLE_CAN_DO_WHOAMI")
+				.antMatchers("/users/createUserWithAuthority").permitAll()
+				.antMatchers("/users").permitAll()
+				.antMatchers("/events/*").permitAll()
+				.antMatchers("/events/*/*").permitAll()
 				.antMatchers("/articles/*").permitAll()
-				.antMatchers("/utilisateurs/whoami3").hasAuthority("ROLE_CAN_DO_WHOAMI")
-				.antMatchers("/utilisateurs/roled").permitAll()
-				.antMatchers("/utilisateurs").permitAll()
-
 				.anyRequest().authenticated()
 
 				.and().csrf().disable();
@@ -54,22 +55,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.httpBasic();
 
 		http.headers().frameOptions().sameOrigin();
-
-//		http.addFilter(new JsonAuthenticationFilter(authenticationManager(), new
-//				ObjectMapper()));
-
 		http.httpBasic();
 		http.headers().frameOptions().sameOrigin();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(utilisateurService);
-	}
-
-	@Bean
-	public static PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		auth.userDetailsService(userService);
 	}
 
 	@Bean

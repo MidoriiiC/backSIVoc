@@ -3,7 +3,6 @@ package fr.iutparis8.CSID.backSIVoc.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,20 +18,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import fr.iutparis8.CSID.backSIVoc.enums.RoleEnum;
+import fr.iutparis8.CSID.backSIVoc.enums.AuthorityEnum;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "utilisateur")
-public class UtilisateurEntity implements Serializable, UserDetails {
+@Table(name = "user")
+public class UserEntity implements Serializable, UserDetails {
 
-	public UtilisateurEntity() {
-	}
-
-	private static Collection<? extends GrantedAuthority> getDefaultAuthority() {
-		Collection<RoleEnum> auth = new ArrayList<RoleEnum>();
-		auth.add(RoleEnum.ROLE_UTILISATEUR);
-		return auth;
+	public UserEntity() {
 	}
 
 	@Id
@@ -57,10 +49,9 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 	@NotNull
 	private String email;
 
-	// nullable = false
-	@Column(name = "authorities")
+	@Column(name = "authority")
 	@Enumerated(EnumType.STRING)
-	private RoleEnum role;
+	private AuthorityEnum authority;
 
 	@Column(name = "account_not_locked")
 	private boolean accountNonLocked;
@@ -81,8 +72,8 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 		return this.id;
 	}
 
-	public RoleEnum getRole() {
-		return role;
+	public AuthorityEnum getAutority() {
+		return authority;
 	}
 
 	public void setId(int id) {
@@ -97,8 +88,8 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 		this.password = mdp;
 	}
 
-	public void setRole(RoleEnum r) {
-		this.role = r;
+	public void setAuthority(AuthorityEnum r) {
+		this.authority = r;
 	}
 
 	public String getFirstname() {
@@ -171,7 +162,7 @@ public class UtilisateurEntity implements Serializable, UserDetails {
 		this.accountNonExpired = accountNonExpired;
 	}
 
-	public UtilisateurEntity orElseThrow(Object object) {
+	public UserEntity orElseThrow(Object object) {
 		return null;
 	}
 

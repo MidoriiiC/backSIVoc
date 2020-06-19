@@ -19,12 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.iutparis8.CSID.backSIVoc.configuration.SecurityConfiguration;
-import fr.iutparis8.CSID.backSIVoc.dto.UtilisateurDTO;
-import fr.iutparis8.CSID.backSIVoc.mapper.UtilisateurMapper;
+import fr.iutparis8.CSID.backSIVoc.dto.UserDTO;
+import fr.iutparis8.CSID.backSIVoc.mapper.UserMapper;
 import fr.iutparis8.CSID.backSIVoc.model.BlocPassword;
-import fr.iutparis8.CSID.backSIVoc.model.Utilisateur;
-import fr.iutparis8.CSID.backSIVoc.service.UtilisateurService;
+import fr.iutparis8.CSID.backSIVoc.model.User;
+import fr.iutparis8.CSID.backSIVoc.service.UserService;
 
 
 /**
@@ -36,21 +35,21 @@ import fr.iutparis8.CSID.backSIVoc.service.UtilisateurService;
  *
  */
 @RestController
-@RequestMapping("/utilisateurs")
-public class UtilisateurControleur {
+@RequestMapping("/users")
+public class UserControleur {
 
-	private UtilisateurService service;
+	private UserService service;
 
 	@Autowired
-	public UtilisateurControleur(UtilisateurService us) {
-		this.service = us;
+	public UserControleur(UserService userS) {
+		this.service = userS;
 	}
 
 	
 	
 	@RolesAllowed("ROLE_CAN_DO_WHOAMI")
 	@GetMapping("/whoami")
-	public String whoAmI() {
+	public String whoAmI() {  //fonction qui va disparaître
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUser = null;
 		String currentCred = null;
@@ -66,7 +65,7 @@ public class UtilisateurControleur {
 	}
 	
 	@GetMapping("/whoami3")
-	public String whoAmI3() {
+	public String whoAmI3() {  //fonction qui va disparaître
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUser = null;
 		String currentCred = null;
@@ -83,7 +82,7 @@ public class UtilisateurControleur {
 	
 	@RolesAllowed("ROLE_CAN_DO_WHOAMI__")
 	@GetMapping("/whoami2")
-	public String whoAmI2() {
+	public String whoAmI2() {   //fonction qui va disparaître
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String currentUser = null;
 		String currentCred = null;
@@ -99,24 +98,20 @@ public class UtilisateurControleur {
 	}
 	
 	@PutMapping("/{utilisateur}")
-	public ResponseEntity<?> updateMotDePasse(@PathVariable String utilisateur, @RequestBody BlocPassword bp) {
-
-		bp.setOldPassword(SecurityConfiguration.passwordEncoder().encode(bp.getOldPassword()));
-		bp.setNewPassword(SecurityConfiguration.passwordEncoder().encode(bp.getNewPassword()));
-
-		int succes = this.service.updatePassword(bp, utilisateur);
-		if (succes == 1)
+	public ResponseEntity<?> updatePassword(@PathVariable String utilisateur, @RequestBody BlocPassword blockPassword) {
+		int success = this.service.updatePassword(blockPassword, utilisateur);
+		if (success == 1)
 			return ResponseEntity.ok().build();
-		if(succes == 2)
+		if(success == 2)
 			return ResponseEntity.unprocessableEntity().build();
 		return ResponseEntity.badRequest().build();
 	}
 	
-	@PostMapping("/creation")
-	public ResponseEntity<?> creerUnCompte(@RequestBody Utilisateur u){
+	@PostMapping("/create")
+	public ResponseEntity<?> createAccount(@RequestBody User user){
 		
-		Utilisateur reponse = this.service.creerUtilisateur(u);
-		if(reponse.getId()==u.getId()) {
+		User reponse = this.service.createUser(user);
+		if(reponse.getId()==user.getId()) {
 			return ResponseEntity.created(null).build();
 		}
 		return ResponseEntity.badRequest().build();
@@ -124,20 +119,20 @@ public class UtilisateurControleur {
 	
 	@CrossOrigin(origins = "*")
 	@GetMapping
-	public List<UtilisateurDTO> getAllUtilisateurs() {
-		List<Utilisateur> listU = this.service.getAllUtilisateurs();
-		List<UtilisateurDTO> listDTO = UtilisateurMapper.listUtilisateurToUtilisateurDTO(listU);
+	public List<UserDTO> getAllUsers() {
+		List<User> listU = this.service.getAllUsers();
+		List<UserDTO> listDTO = UserMapper.listUserToUserDTO(listU);
 		return listDTO;
 	}
 	
 	@CrossOrigin(origins = "*")
-	@PostMapping("/roled")
-	public ResponseEntity<?> creerUnCompteRoled(@RequestBody UtilisateurDTO dto){
-		Utilisateur u = UtilisateurMapper.utilisateurDTOtoUtilisateur(dto);
-		Utilisateur reponse = this.service.creerUtilisateurRoled(u);
-		if(reponse.getNom()==dto.getNom())
+	@PostMapping("/createUserWithAuthority")
+	public ResponseEntity<?> createAccountwithAuthority(@RequestBody UserDTO userDTo){
+		User user = UserMapper.userDTOtoUser(userDTo);
+		User reponse = this.service.createUserWithAuthority(user);
+		if(reponse.getName()==userDTo.getName())
 			return ResponseEntity.created(null).build();
 		return ResponseEntity.badRequest().build();
-		}
+	}
 
 }

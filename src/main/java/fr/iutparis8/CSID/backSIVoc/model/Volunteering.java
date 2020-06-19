@@ -7,7 +7,7 @@ public class Volunteering {
 	
 	private String label;
 	
-	private Utilisateur volunteer;
+	private User volunteer;
 	
 	private String description;
 	
@@ -19,7 +19,7 @@ public class Volunteering {
 		
 	}
 
-	public Volunteering(int idVolunteering, String label, Utilisateur volunteer,
+	public Volunteering(int idVolunteering, String label, User volunteer,
 			String description, String scheldule, int eventId) {
 		super();
 		this.idVolunteering = idVolunteering;
@@ -47,11 +47,11 @@ public class Volunteering {
 		this.label = label;
 	}
 
-	public Utilisateur getVolunteer() {
+	public User getVolunteer() {
 		return volunteer;
 	}
 
-	public void setVolunteer(Utilisateur volunteer) {
+	public void setVolunteer(User volunteer) {
 		this.volunteer = volunteer;
 	}
 
