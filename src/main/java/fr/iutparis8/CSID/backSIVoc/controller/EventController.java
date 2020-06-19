@@ -69,11 +69,16 @@ public class EventController {
 	}
 	
 	@CrossOrigin(origins = "*")
-	@PostMapping("/{id}/addVolunteer")
-	public boolean addVolunteer(@PathVariable int id, @RequestBody VolunteeringDTO v) {
-		System.out.println(v.getVolunteer().getId());
+	@PutMapping("/{id}")
+	public boolean modifyVolunteering(@PathVariable int id, @RequestBody VolunteeringDTO v) {
 		v.setEventId(id);
-		return this.service.addVolunteer(VolunteeringMapper.DTOToObject(v));
-		
+		return this.service.saveVolunteer(VolunteeringMapper.DTOToObject(v));
+	}
+	
+	@CrossOrigin(origins="*")
+	@PostMapping("{id}/addVolunteering")
+	public boolean addVolunteering(@PathVariable int id, @RequestBody VolunteeringDTO v) {
+		v.setEventId(id);
+		return this.service.saveVolunteer(VolunteeringMapper.DTOToObject(v));
 	}
 }

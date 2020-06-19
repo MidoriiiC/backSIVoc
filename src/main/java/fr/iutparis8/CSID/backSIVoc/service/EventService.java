@@ -16,32 +16,32 @@ public class EventService {
 
 	private EventRepository er;
 	private VolunteeringService vs;
-	
+
 	@Autowired
 	public EventService(EventRepository er, VolunteeringService vs) {
 		this.er = er;
 		this.vs = vs;
 	}
-	
+
 	public Event getEventById(Integer id) {
 		return EventMapper.entityToObject(this.er.getOne(id));
 	}
-	
+
 	public Event createEvent(Event e) {
 		return EventMapper.entityToObject(this.er.save(EventMapper.objectToEntity(e)));
 	}
 
 	public Event modify(Event e) {
 		EventEntity eventModified = this.er.save(EventMapper.objectToEntity((e)));
-        return EventMapper.entityToObject(eventModified);
+		return EventMapper.entityToObject(eventModified);
 	}
 
 	public List<Event> getAllEvents() {
 		List<EventEntity> events = this.er.findAll();
 		return EventMapper.listEntityToListObject(events);
 	}
-	
-	public boolean addVolunteer(Volunteering v) {
+
+	public boolean saveVolunteer(Volunteering v) {
 		this.vs.modify(v);
 		return true;
 	}
