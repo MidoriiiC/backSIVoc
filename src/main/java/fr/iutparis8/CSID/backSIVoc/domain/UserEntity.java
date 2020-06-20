@@ -22,7 +22,7 @@ import fr.iutparis8.CSID.backSIVoc.enums.AuthorityEnum;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class UserEntity implements Serializable, UserDetails {
 
 	public UserEntity() {

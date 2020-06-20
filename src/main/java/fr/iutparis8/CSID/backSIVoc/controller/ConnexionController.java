@@ -23,12 +23,12 @@ import fr.iutparis8.CSID.backSIVoc.service.ConnexionService;
 
 @RestController
 @RequestMapping("/connexion")
-public class ConnexionControleur {
+public class ConnexionController {
 
 	private ConnexionService service;
 
 	@Autowired
-	public ConnexionControleur(ConnexionService cs) {
+	public ConnexionController(ConnexionService cs) {
 		this.service = cs;
 	}
 
