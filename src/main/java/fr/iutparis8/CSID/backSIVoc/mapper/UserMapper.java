@@ -12,6 +12,7 @@ import fr.iutparis8.CSID.backSIVoc.model.User;
 public class UserMapper {
 	
 	public static User userDTOtoUser(UserDTO userDTO) {
+		if(userDTO == null) return null;
 		User user = new User();
 		user.setId(userDTO.getId());
 		user.setName(userDTO.getName());
@@ -23,6 +24,7 @@ public class UserMapper {
 	}
 
 	public static UserEntity userToUserEntity(User user) {
+		if(user == null) return null;
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(user.getId());
 		userEntity.setUsername(user.getName());

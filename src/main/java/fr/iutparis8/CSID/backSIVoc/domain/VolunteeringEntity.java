@@ -1,14 +1,11 @@
 package fr.iutparis8.CSID.backSIVoc.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,7 +18,7 @@ public class VolunteeringEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idVolunteering")
+	@Column(name="id_volunteering")
 	private int idVolunteering;
 	
 	@ManyToOne
