@@ -26,40 +26,40 @@ import fr.iutparis8.CSID.backSIVoc.service.EventService;
 @RestController
 @RequestMapping("/events")
 public class EventController {
-	
+
 	private EventService service;
-	
+
 	@Autowired
 	public EventController(EventService es) {
 		this.service = es;
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@PutMapping("/{id}")
-	public ResponseEntity<?> modifyEvent(@PathVariable int id, @RequestBody EventDTO event){
-        if(id != event.getId()) {
-    		return ResponseEntity.badRequest().build();
-        }
-        Event eventModified = this.service.modify(EventMapper.dtoToObject(event));
-        return ResponseEntity.created(null).body(EventMapper.objectToDto(eventModified));
+	public ResponseEntity<?> modifyEvent(@PathVariable int id, @RequestBody EventDTO event) {
+		if (id != event.getId()) {
+			return ResponseEntity.badRequest().build();
+		}
+		Event eventModified = this.service.modify(EventMapper.dtoToObject(event));
+		return ResponseEntity.created(null).body(EventMapper.objectToDto(eventModified));
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@PostMapping("/create")
 	public ResponseEntity<?> creerEvent(@RequestBody EventDTO e) {
 		Event newEvent = this.service.createEvent(EventMapper.dtoToObject(e));
-		if(newEvent != null) {
+		if (newEvent != null) {
 			return ResponseEntity.created(null).body(EventMapper.objectToDto(newEvent));
 		}
 		return ResponseEntity.badRequest().build();
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@GetMapping("/{id}")
 	public EventDTO eventParId(@PathVariable int id) {
 		return EventMapper.objectToDto(this.service.getEventById(id));
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@GetMapping
 	public List<EventDTO> getAllEvent() {
@@ -67,23 +67,24 @@ public class EventController {
 		List<EventDTO> listDTO = EventMapper.listObjectToListDTO(listE);
 		return listDTO;
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@GetMapping("/lasts")
-	public List<EventDTO> getFiveLastsEventsCreated(){
+	public List<EventDTO> getFiveLastsEventsCreated() {
 		List<EventDTO> all = this.getAllEvent();
 		int length = all.size();
-		if(length<5) return all;
-		return all.subList(length-5, length);
+		if (length < 5)
+			return all;
+		return all.subList(length - 5, length);
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@PutMapping("/{id}/modifyVolunteering")
 	public boolean modifyVolunteering(@PathVariable int id, @RequestBody VolunteeringDTO v) {
 		return this.service.saveVolunteer(VolunteeringMapper.DTOToObject(v));
 	}
-	
-	@CrossOrigin(origins="*")
+
+	@CrossOrigin(origins = "*")
 	@PostMapping("/{id}/addVolunteering")
 	public boolean addVolunteering(@PathVariable int id, @RequestBody VolunteeringDTO v) {
 		v.setEventId(id);

@@ -3,18 +3,19 @@ package fr.iutparis8.CSID.backSIVoc.dto;
 public class ArticleDTO {
 
 	private int id;
-	private String title;	
+	private String title;
 	private String content;
 	private String author;
 	private String date;
 	private String hour;
 	private String illustration;
-	
+
 	public ArticleDTO() {
-		
+
 	}
-	
-	public ArticleDTO(int id, String title, String content, String author, String date, String hour,String illustration) {
+
+	public ArticleDTO(int id, String title, String content, String author, String date, String hour,
+			String illustration) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -80,7 +81,5 @@ public class ArticleDTO {
 	public void setIllustration(String illustration) {
 		this.illustration = illustration;
 	}
-	
-	
-	
+
 }

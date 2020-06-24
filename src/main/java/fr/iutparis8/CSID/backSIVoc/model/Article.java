@@ -3,14 +3,13 @@ package fr.iutparis8.CSID.backSIVoc.model;
 public class Article {
 
 	private int id;
-	private String title;	
+	private String title;
 	private String content;
 	private String author;
 	private String date;
 	private String hour;
 	private String illustration;
 
-	
 	public Article(int id, String title, String content, String author, String date, String hour, String illustration) {
 		super();
 		this.id = id;
@@ -77,7 +76,5 @@ public class Article {
 	public void setIllustration(String illustration) {
 		this.illustration = illustration;
 	}
-	
-	
-	
+
 }

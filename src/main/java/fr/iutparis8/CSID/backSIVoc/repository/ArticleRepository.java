@@ -9,9 +9,10 @@ import fr.iutparis8.CSID.backSIVoc.domain.ArticleEntity;
 import fr.iutparis8.CSID.backSIVoc.domain.EventEntity;
 
 @Repository
-public interface ArticleRepository extends JpaRepository<ArticleEntity,Integer>{
+public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer> {
 
 	ArticleEntity findByTitle(String title);
+
 	public List<ArticleEntity> findAllByOrderByIdAsc();
 
 }

@@ -3,7 +3,7 @@ package fr.iutparis8.CSID.backSIVoc.dto;
 import java.util.List;
 
 public class EventDTO {
-	
+
 	private int id;
 	private String name;
 	private String contentArticle;
@@ -13,11 +13,11 @@ public class EventDTO {
 	private String place;
 	private String organizer;
 	private List<VolunteeringDTO> volunteerings;
-	
+
 	public EventDTO() {
-		
+
 	}
-	
+
 	public EventDTO(int id, String name, String contentArticle, String image, String linkVideo, String date,
 			String hour, String place, String organizer, List<VolunteeringDTO> volunteerings) {
 		super();
@@ -113,7 +113,4 @@ public class EventDTO {
 		this.volunteerings = volunteerings;
 	}
 
-	
-	
-	
 }

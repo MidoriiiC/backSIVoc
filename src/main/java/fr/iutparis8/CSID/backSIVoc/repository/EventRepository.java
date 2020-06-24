@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 import fr.iutparis8.CSID.backSIVoc.domain.EventEntity;
 
 @Repository
-public interface EventRepository extends JpaRepository<EventEntity,Integer>{
+public interface EventRepository extends JpaRepository<EventEntity, Integer> {
 
 	EventEntity findByName(String name);
+
 	public List<EventEntity> findAllByOrderByIdAsc();
 
 }

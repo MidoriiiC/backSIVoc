@@ -3,7 +3,7 @@ package fr.iutparis8.CSID.backSIVoc.model;
 import java.util.List;
 
 public class Event {
-	
+
 	private int id;
 	private String name;
 	private String contentArticle;
@@ -13,13 +13,13 @@ public class Event {
 	private String place;
 	private String organizer;
 	private List<Volunteering> volunteerings;
-	
+
 	public Event() {
-		
+
 	}
-	
-	public Event(int id, String name, String contentArticle, String image, String linkVideo, String date,
-			String hour, String place, String organizer, List<Volunteering> volunteerings) {
+
+	public Event(int id, String name, String contentArticle, String image, String linkVideo, String date, String hour,
+			String place, String organizer, List<Volunteering> volunteerings) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -112,6 +112,5 @@ public class Event {
 	public void setVolunteerings(List<Volunteering> volunteerings) {
 		this.volunteerings = volunteerings;
 	}
-	
-	
+
 }
