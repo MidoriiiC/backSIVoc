@@ -30,12 +30,15 @@ public class ArticleEntity {
 	
 	@Column(name="hour")
 	private String hour;
+	
+	@Column(name="illustration")
+	private String illustration;
 
 	public ArticleEntity() {
 		
 	}
 	
-	public ArticleEntity(int id, String title, String content, String author, String date, String hour) {
+	public ArticleEntity(int id, String title, String content, String author, String date, String hour, String illustration) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -43,6 +46,7 @@ public class ArticleEntity {
 		this.author = author;
 		this.date = date;
 		this.hour = hour;
+		this.illustration = illustration;
 	}
 
 	public int getId() {
@@ -92,6 +96,15 @@ public class ArticleEntity {
 	public void setHour(String hour) {
 		this.hour = hour;
 	}
+
+	public String getIllustration() {
+		return illustration;
+	}
+
+	public void setIllustration(String illustration) {
+		this.illustration = illustration;
+	}
+	
 	
 	
 	

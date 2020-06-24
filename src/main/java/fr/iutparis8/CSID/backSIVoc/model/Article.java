@@ -8,8 +8,10 @@ public class Article {
 	private String author;
 	private String date;
 	private String hour;
+	private String illustration;
+
 	
-	public Article(int id, String title, String content, String author, String date, String hour) {
+	public Article(int id, String title, String content, String author, String date, String hour, String illustration) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -17,6 +19,7 @@ public class Article {
 		this.author = author;
 		this.date = date;
 		this.hour = hour;
+		this.illustration = illustration;
 	}
 
 	public int getId() {
@@ -66,5 +69,15 @@ public class Article {
 	public void setHour(String hour) {
 		this.hour = hour;
 	}
+
+	public String getIllustration() {
+		return illustration;
+	}
+
+	public void setIllustration(String illustration) {
+		this.illustration = illustration;
+	}
+	
+	
 	
 }
