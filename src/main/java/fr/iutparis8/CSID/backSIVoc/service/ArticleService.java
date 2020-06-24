@@ -34,7 +34,7 @@ public class ArticleService {
 	}
 
 	public List<Article> getAllArticles() {
-		List<ArticleEntity> articles = this.ar.findAll();
+		List<ArticleEntity> articles = this.ar.findAllByOrderByIdAsc();
 		return ArticleMapper.listEntityToListObject(articles);
 	}
 	

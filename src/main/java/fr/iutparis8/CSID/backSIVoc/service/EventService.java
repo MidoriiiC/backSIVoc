@@ -37,7 +37,7 @@ public class EventService {
 	}
 
 	public List<Event> getAllEvents() {
-		List<EventEntity> events = this.er.findAll();
+		List<EventEntity> events = this.er.findAllByOrderByIdAsc();
 		return EventMapper.listEntityToListObject(events);
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.iutparis8.CSID.backSIVoc.dto.ArticleDTO;
+import fr.iutparis8.CSID.backSIVoc.dto.EventDTO;
 import fr.iutparis8.CSID.backSIVoc.mapper.ArticleMapper;
 import fr.iutparis8.CSID.backSIVoc.model.Article;
 import fr.iutparis8.CSID.backSIVoc.service.ArticleService;
@@ -60,6 +61,15 @@ public class ArticleController {
 	public List<ArticleDTO> allArticles(){
 		List<Article> articles = this.service.getAllArticles();
 		return ArticleMapper.listObjectToListDTO(articles);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/lasts")
+	public List<ArticleDTO> getFiveLastsArticlesCreated(){
+		List<ArticleDTO> all = this.allArticles();
+		int length = all.size();
+		if(length<5) return all;
+		return all.subList(length-5, length);
 	}
 
 }
