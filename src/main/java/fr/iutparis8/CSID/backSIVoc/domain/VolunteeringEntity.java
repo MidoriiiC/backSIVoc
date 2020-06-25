@@ -13,37 +13,37 @@ import javax.persistence.Table;
 //create table volunteering (idEvent integer, idVolunteering serial, label varchar, volunteer varchar, description varchar (3000), scheldule varchar, primary key (idEvent, idVolunteering));
 
 @Entity
-@Table(name="volunteering")
-public class VolunteeringEntity{
-	
+@Table(name = "volunteering")
+public class VolunteeringEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_volunteering")
+	@Column(name = "id_volunteering")
 	private int idVolunteering;
-	
+
 	@ManyToOne
-	@JoinColumn(name="event_id")
+	@JoinColumn(name = "event_id")
 	private EventEntity event;
-	
-	@Column(name="label")
+
+	@Column(name = "label")
 	private String label;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="volunteer_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "volunteer_id")
 	private UserEntity volunteer;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	private String description;
-	
-	@Column(name="scheldule")
+
+	@Column(name = "scheldule")
 	private String scheldule;
-		
+
 	public VolunteeringEntity() {
-		
+
 	}
 
-	public VolunteeringEntity(int idVolunteering, String label, UserEntity volunteer,
-			String description, String scheldule, EventEntity e) {
+	public VolunteeringEntity(int idVolunteering, String label, UserEntity volunteer, String description,
+			String scheldule, EventEntity e) {
 		super();
 		this.idVolunteering = idVolunteering;
 		this.label = label;

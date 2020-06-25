@@ -8,37 +8,38 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="article")
+@Table(name = "article")
 public class ArticleEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="title")
+
+	@Column(name = "title")
 	private String title;
-	
-	@Column(name="content")
+
+	@Column(name = "content")
 	private String content;
-	
-	@Column(name="author")
+
+	@Column(name = "author")
 	private String author;
-	
-	@Column(name="date")
+
+	@Column(name = "date")
 	private String date;
-	
-	@Column(name="hour")
+
+	@Column(name = "hour")
 	private String hour;
-	
-	@Column(name="illustration")
+
+	@Column(name = "illustration")
 	private String illustration;
 
 	public ArticleEntity() {
-		
+
 	}
-	
-	public ArticleEntity(int id, String title, String content, String author, String date, String hour, String illustration) {
+
+	public ArticleEntity(int id, String title, String content, String author, String date, String hour,
+			String illustration) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -104,8 +105,5 @@ public class ArticleEntity {
 	public void setIllustration(String illustration) {
 		this.illustration = illustration;
 	}
-	
-	
-	
-	
+
 }

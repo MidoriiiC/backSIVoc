@@ -1,26 +1,25 @@
 package fr.iutparis8.CSID.backSIVoc.model;
 
 public class Volunteering {
-	
+
 	private int idVolunteering;
-	
-	
+
 	private String label;
-	
+
 	private User volunteer;
-	
+
 	private String description;
-	
+
 	private String scheldule;
-	
+
 	private int eventId;
-	
+
 	public Volunteering() {
-		
+
 	}
 
-	public Volunteering(int idVolunteering, String label, User volunteer,
-			String description, String scheldule, int eventId) {
+	public Volunteering(int idVolunteering, String label, User volunteer, String description, String scheldule,
+			int eventId) {
 		super();
 		this.idVolunteering = idVolunteering;
 		this.label = label;
@@ -37,7 +36,6 @@ public class Volunteering {
 	public void setIdVolunteering(int idVolunteering) {
 		this.idVolunteering = idVolunteering;
 	}
-
 
 	public String getLabel() {
 		return label;
@@ -70,7 +68,6 @@ public class Volunteering {
 	public void setScheldule(String scheldule) {
 		this.scheldule = scheldule;
 	}
-	
 
 	public int getEventId() {
 		return eventId;
@@ -80,7 +77,4 @@ public class Volunteering {
 		this.eventId = eventId;
 	}
 
-	
-
-	
 }

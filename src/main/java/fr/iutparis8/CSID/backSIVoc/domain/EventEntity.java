@@ -52,8 +52,8 @@ public class EventEntity {
 
 	}
 
-	public EventEntity(int id, String name, String content, String image, String linkVideo, String date,
-			String hour, String place, String organizer, List<VolunteeringEntity> volunteerings) {
+	public EventEntity(int id, String name, String content, String image, String linkVideo, String date, String hour,
+			String place, String organizer, List<VolunteeringEntity> volunteerings) {
 		super();
 		this.id = id;
 		this.name = name;

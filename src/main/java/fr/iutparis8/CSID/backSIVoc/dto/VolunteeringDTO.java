@@ -1,26 +1,25 @@
 package fr.iutparis8.CSID.backSIVoc.dto;
 
 public class VolunteeringDTO {
-	
+
 	private int idVolunteering;
-	
-	
+
 	private String label;
-	
+
 	private UserDTO volunteer;
-	
+
 	private String description;
-	
+
 	private String scheldule;
-	
+
 	private int eventId;
-	
+
 	public VolunteeringDTO() {
-		
+
 	}
 
-	public VolunteeringDTO(int idVolunteering, String label, UserDTO volunteer,
-			String description, String scheldule, int eventId) {
+	public VolunteeringDTO(int idVolunteering, String label, UserDTO volunteer, String description, String scheldule,
+			int eventId) {
 		super();
 		this.idVolunteering = idVolunteering;
 		this.label = label;
@@ -78,5 +77,4 @@ public class VolunteeringDTO {
 		this.eventId = eventId;
 	}
 
-	
 }

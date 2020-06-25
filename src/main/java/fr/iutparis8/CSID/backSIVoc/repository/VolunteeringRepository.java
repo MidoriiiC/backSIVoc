@@ -9,9 +9,10 @@ import fr.iutparis8.CSID.backSIVoc.domain.EventEntity;
 import fr.iutparis8.CSID.backSIVoc.domain.VolunteeringEntity;
 
 @Repository
-public interface VolunteeringRepository extends JpaRepository<VolunteeringEntity, Integer>{
-	
-	 public VolunteeringEntity findByLabel(String label);
-	 public List<VolunteeringEntity> findByEvent(EventEntity e);
+public interface VolunteeringRepository extends JpaRepository<VolunteeringEntity, Integer> {
+
+	public VolunteeringEntity findByLabel(String label);
+
+	public List<VolunteeringEntity> findByEvent(EventEntity e);
 
 }
