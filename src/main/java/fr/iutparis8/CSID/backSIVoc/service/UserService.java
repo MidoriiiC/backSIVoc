@@ -41,13 +41,6 @@ public class UserService implements UserDetailsService {
 	}
 	
 	public User createUserWithAuthority(User user) {
-		if(user.getName().equals("admin"))
-			user.setAuthority("administrateur");
-		if(user.getName().equals("modo"))
-			user.setAuthority("modérateur");
-		if(user.getName().equals("benev"))
-			user.setAuthority("bénévole");
-
 		UserEntity userEntity = UserMapper.userToUserEntity(user);		
 		UserEntity retour = userR.save(userEntity);
 		user = UserMapper.userEntityToUser(retour);

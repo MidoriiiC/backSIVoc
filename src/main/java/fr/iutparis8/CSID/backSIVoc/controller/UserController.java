@@ -30,12 +30,12 @@ import fr.iutparis8.CSID.backSIVoc.service.UserService;
  */
 @RestController
 @RequestMapping("/users")
-public class UserControleur {
+public class UserController {
 
 	private UserService service;
 
 	@Autowired
-	public UserControleur(UserService userS) {
+	public UserController(UserService userS) {
 		this.service = userS;
 	}
 
